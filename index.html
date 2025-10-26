@@ -153,11 +153,12 @@
             border-left-color: #764ba2;
         }
 
-        .term-card.detect-respond { border-left-color: #9b59b6; }
-        .term-card.risk-governance { border-left-color: #e74c3c; }
-        .term-card.compliance-privacy { border-left-color: #27ae60; }
-        .term-card.operational-resilience { border-left-color: #16a085; }
-        .term-card.trust-services { border-left-color: #2c3e50; }
+        .term-card.govern { border-left-color: #1e3a8a; }
+        .term-card.identify { border-left-color: #f59e0b; }
+        .term-card.protect { border-left-color: #10b981; }
+        .term-card.detect { border-left-color: #3b82f6; }
+        .term-card.respond { border-left-color: #ef4444; }
+        .term-card.recover { border-left-color: #8b5cf6; }
 
         .term-badges {
             display: flex;
@@ -197,11 +198,12 @@
             width: fit-content;
         }
 
-        .term-category.detect-respond { background: #9b59b6; }
-        .term-category.risk-governance { background: #e74c3c; }
-        .term-category.compliance-privacy { background: #27ae60; }
-        .term-category.operational-resilience { background: #16a085; }
-        .term-category.trust-services { background: #2c3e50; }
+        .term-category.govern { background: #1e3a8a; }
+        .term-category.identify { background: #f59e0b; }
+        .term-category.protect { background: #10b981; }
+        .term-category.detect { background: #3b82f6; }
+        .term-category.respond { background: #ef4444; }
+        .term-category.recover { background: #8b5cf6; }
 
         .term-description {
             font-size: 0.9em;
@@ -376,13 +378,14 @@
                 
                 <div class="filters">
                     <div class="filter-row">
-                        <span class="filter-label">Categories:</span>
+                        <span class="filter-label">NIST CSF 2.0:</span>
                         <button class="filter-btn active" onclick="filterCategory('all', event)">All</button>
-                        <button class="filter-btn" onclick="filterCategory('detect-respond', event)">Detect & Respond</button>
-                        <button class="filter-btn" onclick="filterCategory('risk-governance', event)">Risk & Governance</button>
-                        <button class="filter-btn" onclick="filterCategory('compliance-privacy', event)">Compliance & Privacy</button>
-                        <button class="filter-btn" onclick="filterCategory('operational-resilience', event)">Operational Resilience</button>
-                        <button class="filter-btn" onclick="filterCategory('trust-services', event)">Trust Services</button>
+                        <button class="filter-btn" onclick="filterCategory('govern', event)">Govern</button>
+                        <button class="filter-btn" onclick="filterCategory('identify', event)">Identify</button>
+                        <button class="filter-btn" onclick="filterCategory('protect', event)">Protect</button>
+                        <button class="filter-btn" onclick="filterCategory('detect', event)">Detect</button>
+                        <button class="filter-btn" onclick="filterCategory('respond', event)">Respond</button>
+                        <button class="filter-btn" onclick="filterCategory('recover', event)">Recover</button>
                     </div>
                     <div class="filter-row">
                         <span class="filter-label">Maturity:</span>
@@ -400,8 +403,8 @@
                     <div class="stat-label">Total Terms</div>
                 </div>
                 <div class="stat-box">
-                    <div class="stat-number" id="categoriesCount">5</div>
-                    <div class="stat-label">Categories</div>
+                    <div class="stat-number" id="categoriesCount">6</div>
+                    <div class="stat-label">NIST Functions</div>
                 </div>
                 <div class="stat-box">
                     <div class="stat-number" id="displayedTerms">0</div>
@@ -424,169 +427,175 @@
 
     <script>
         const terms = [
-            // DETECT & RESPOND
-            { name: "RASP", category: "detect-respond", maturity: "mature", description: "Runtime Application Self-Protection - Self-executing application protection at runtime", technologies: ["Contrast Security", "Imperva RASP", "Rapid7", "WhiteHat"] },
-            { name: "Security data hub", category: "detect-respond", maturity: "trending", description: "Security data hub - Centralized aggregation of security data", technologies: ["Splunk Enterprise", "Elasticsearch", "Datadog", "AWS Security Lake", "Chronicle"] },
-            { name: "CTEM/BAS/EASM/APM", category: "detect-respond", maturity: "trending", description: "Continuous Threat Exposure Management / Breach and Attack Simulation / External Attack Surface", technologies: ["Qualys CTEM", "Rapid7 Insight", "Tenable Exposure", "Censys", "Shodan"] },
-            { name: "Deception", category: "detect-respond", maturity: "trending", description: "Deception technology - Intrusion detection technique using deception", technologies: ["Deception Point", "Trapx Security", "Illusive Networks", "GuardiCore"] },
-            { name: "Business App surveillance", category: "detect-respond", maturity: "mature", description: "Business application monitoring - Surveillance of critical applications", technologies: ["Dynatrace", "New Relic", "Splunk APM", "DataDog APM", "AppDynamics"] },
-            { name: "Digital twin", category: "detect-respond", maturity: "emerging", description: "Digital twin - Virtual reproduction of IT environment", technologies: ["Cisco DNA", "VMware NSX", "Fortinet FortiSIEM", "IBM Turbonomic"] },
-            { name: "Auto Secret detection", category: "detect-respond", maturity: "trending", description: "Automatic secret detection - Identification of exposed credentials", technologies: ["GitGuardian", "TruffleHog", "AWS Secrets Manager", "HashiCorp Vault"] },
-            { name: "Detection engineering", category: "detect-respond", maturity: "trending", description: "Detection engineering - Design of advanced detection rules", technologies: ["Splunk ES", "Elastic Security", "CrowdStrike Falcon", "Carbon Black"] },
-            { name: "Cyber range", category: "detect-respond", maturity: "mature", description: "Cyber range - Cybersecurity training environment", technologies: ["Immersive Labs", "HackTheBox", "TryHackMe", "Cybrary"] },
-            { name: "DAST (Dynamic Application Security Testing)", category: "detect-respond", maturity: "mature", description: "Dynamic application security testing - Runtime security testing", technologies: ["Burp Suite", "OWASP ZAP", "Acunetix", "Veracode", "Rapid7"] },
-            { name: "Supply chain security", category: "detect-respond", maturity: "trending", description: "Supply chain security - Protection of software dependencies", technologies: ["Snyk", "BlackDuck", "Sonatype Nexus", "Checkmarx", "WhiteSource"] },
-            { name: "AI for security", category: "detect-respond", maturity: "trending", description: "AI for security - AI use in threat detection", technologies: ["Darktrace", "Vectra AI", "Fortinet AI", "CrowdStrike AI", "Securonix"] },
-            { name: "SBOM/SCA (Software Bill of Materials / Composition Analysis)", category: "detect-respond", maturity: "trending", description: "Software inventory and component analysis - Dependency management", technologies: ["Snyk", "Black Duck", "Sonatype", "Synopsys", "Dependency-Check"] },
-            { name: "AI risk assessment", category: "detect-respond", maturity: "emerging", description: "AI risk assessment - Analysis of AI system risks", technologies: ["Deloitte AI Risk", "IBM AI Risk", "Accenture AI", "Capgemini AI"] },
-            { name: "MLSecOps (ML Security Operations)", category: "detect-respond", maturity: "emerging", description: "ML Security Operations - ML model security hardening", technologies: ["TensorFlow Security", "MLflow", "Kubeflow", "Databricks"] },
-            { name: "Purple team", category: "detect-respond", maturity: "trending", description: "Purple team - Collaboration between red and blue teams", technologies: ["Atomic Red Team", "Caldera", "Gremlin", "Chaos Toolkit"] },
-            { name: "S-SDLC (Secure Software Development Lifecycle)", category: "detect-respond", maturity: "mature", description: "Secure software development lifecycle - Security integration in DevOps", technologies: ["GitLab DevSecOps", "GitHub Advanced Security", "Synopsys", "Checkmarx"] },
-            { name: "Threat-led risk analysis & pentest", category: "detect-respond", maturity: "mature", description: "Threat-led risk analysis and penetration testing", technologies: ["Burp Suite Pro", "Metasploit", "Nessus", "OpenVAS", "Tenable"] },
-            { name: "Automated IR playbook", category: "detect-respond", maturity: "trending", description: "Automated incident response playbook - Response automation", technologies: ["Splunk SOAR", "Demisto", "Siemplify", "Swimlane"] },
-            { name: "OT probe", category: "detect-respond", maturity: "mature", description: "OT probe - Sensor for operational system monitoring", technologies: ["Claroty", "Fortinet FortiOT", "Tenable OT", "Nozomi Networks"] },
-            { name: "Bug Bounty", category: "detect-respond", maturity: "mature", description: "Bug bounty program - Security crowdsourcing", technologies: ["HackerOne", "Bugcrowd", "Intigriti", "Yeswehack", "Synack"] },
-            { name: "Threat Intelligence Platform", category: "detect-respond", maturity: "mature", description: "Threat intelligence platform - Threat aggregation and analysis", technologies: ["MISP", "ThreatStream", "Recorded Future", "CrowdStrike Intelligence"] },
-            { name: "SOAR (Security Orchestration, Automation and Response)", category: "detect-respond", maturity: "mature", description: "Security orchestration and automation - Incident response automation", technologies: ["Splunk SOAR", "Demisto", "Siemplify", "ServiceNow SecOps"] },
-            { name: "Red team", category: "detect-respond", maturity: "mature", description: "Red team - Expert-led attack simulation", technologies: ["Atomic Red Team", "Caldera", "MITRE ATT&CK", "Pentera", "Mandiant"] },
-            { name: "XDR (Extended Detection and Response)", category: "detect-respond", maturity: "trending", description: "Extended detection and response - Multi-layer correlation", technologies: ["CrowdStrike XDR", "Microsoft Defender XDR", "Palo Alto Cortex XDR", "Sophos XDR"] },
-            { name: "AD monitoring", category: "detect-respond", maturity: "mature", description: "Active Directory monitoring - AD access surveillance", technologies: ["Delinea Secret Server", "Microsoft Sentinel", "Quest Privilege Manager", "BeyondTrust"] },
-            { name: "ISMS (Information Security Management System)", category: "detect-respond", maturity: "mature", description: "Information security management system - Integrated governance", technologies: ["Archer GRC", "Qualys VMDR", "ZenGRC", "AuditBoard"] },
-            { name: "Service catalog", category: "detect-respond", maturity: "mature", description: "Service catalog - IT/security services inventory", technologies: ["ServiceNow ITSM", "BMC Remedy", "Jira Service Management"] },
-            { name: "Cloud based SIEM", category: "detect-respond", maturity: "mature", description: "Cloud-based SIEM - Centralized cloud solution", technologies: ["Splunk Cloud", "Elastic Cloud", "IBM QRadar Cloud", "Fortinet FortiSOC"] },
-            { name: "EDR (Endpoint Detection and Response)", category: "detect-respond", maturity: "mature", description: "Endpoint detection and response - Workstation protection", technologies: ["CrowdStrike Falcon", "Microsoft Defender", "Carbon Black", "SentinelOne", "Cybereason"] },
-            { name: "Containers security", category: "detect-respond", maturity: "trending", description: "Container security - Docker/Kubernetes protection", technologies: ["Docker Security", "Kubernetes Security", "Aqua Security", "Twistlock"] },
-            { name: "Fusion centers (IT/OT/Fraud)", category: "detect-respond", maturity: "trending", description: "Fusion centers - Integration of operations", technologies: ["Splunk Fusion", "ServiceNow", "Fortinet FortiSOC", "Elastic Fusion"] },
-            { name: "CNAPP (Cloud-Native Application Protection)", category: "detect-respond", maturity: "emerging", description: "Cloud-native application protection - Kubernetes security", technologies: ["Snyk", "Aqua", "Palo Alto Prisma", "Wiz"] },
-            { name: "Breach & attack simulation", category: "detect-respond", maturity: "trending", description: "Breach and attack simulation - Continuous security testing", technologies: ["Gremlin", "Chaos Toolkit", "Pentera", "SafeBreak"] },
-            { name: "SAST & DAST Combined", category: "detect-respond", maturity: "mature", description: "Static and dynamic combined testing - Complete code analysis", technologies: ["Checkmarx", "Veracode", "SonarQube", "Fortify"] },
-            { name: "0day management", category: "detect-respond", maturity: "emerging", description: "Zero-day vulnerability management - Critical CVE response", technologies: ["Rapid7", "Tenable", "Qualys", "Kenna Security"] },
+            // IDENTIFY (ID) - Asset Management, Risk Assessment, Vulnerability Identification
+            { name: "RASP", category: "identify", maturity: "mature", description: "Runtime Application Self-Protection - Self-executing application protection at runtime", technologies: ["Contrast Security", "Imperva RASP", "Rapid7", "WhiteHat"] },
+            { name: "CTEM/BAS/EASM/APM", category: "identify", maturity: "trending", description: "Continuous Threat Exposure Management / Breach and Attack Simulation / External Attack Surface", technologies: ["Qualys CTEM", "Rapid7 Insight", "Tenable Exposure", "Censys", "Shodan"] },
+            { name: "Digital twin", category: "identify", maturity: "emerging", description: "Digital twin - Virtual reproduction of IT environment", technologies: ["Cisco DNA", "VMware NSX", "Fortinet FortiSIEM", "IBM Turbonomic"] },
+            { name: "DAST (Dynamic Application Security Testing)", category: "identify", maturity: "mature", description: "Dynamic application security testing - Runtime security testing", technologies: ["Burp Suite", "OWASP ZAP", "Acunetix", "Veracode", "Rapid7"] },
+            { name: "SBOM/SCA (Software Bill of Materials / Composition Analysis)", category: "identify", maturity: "trending", description: "Software inventory and component analysis - Dependency management", technologies: ["Snyk", "Black Duck", "Sonatype", "Synopsys", "Dependency-Check"] },
+            { name: "AI risk assessment", category: "identify", maturity: "emerging", description: "AI risk assessment - Analysis of AI system risks", technologies: ["Deloitte AI Risk", "IBM AI Risk", "Accenture AI", "Capgemini AI"] },
+            { name: "MLSecOps (ML Security Operations)", category: "identify", maturity: "emerging", description: "ML Security Operations - ML model security hardening", technologies: ["TensorFlow Security", "MLflow", "Kubeflow", "Databricks"] },
+            { name: "Purple team", category: "identify", maturity: "trending", description: "Purple team - Collaboration between red and blue teams", technologies: ["Atomic Red Team", "Caldera", "Gremlin", "Chaos Toolkit"] },
+            { name: "Threat-led risk analysis & pentest", category: "identify", maturity: "mature", description: "Threat-led risk analysis and penetration testing", technologies: ["Burp Suite Pro", "Metasploit", "Nessus", "OpenVAS", "Tenable"] },
+            { name: "Bug Bounty", category: "identify", maturity: "mature", description: "Bug bounty program - Security crowdsourcing", technologies: ["HackerOne", "Bugcrowd", "Intigriti", "Yeswehack", "Synack"] },
+            { name: "Red team", category: "identify", maturity: "mature", description: "Red team - Expert-led attack simulation", technologies: ["Atomic Red Team", "Caldera", "MITRE ATT&CK", "Pentera", "Mandiant"] },
+            { name: "Breach & attack simulation", category: "identify", maturity: "trending", description: "Breach and attack simulation - Continuous security testing", technologies: ["Gremlin", "Chaos Toolkit", "Pentera", "SafeBreak"] },
+            { name: "SAST & DAST Combined", category: "identify", maturity: "mature", description: "Static and dynamic combined testing - Complete code analysis", technologies: ["Checkmarx", "Veracode", "SonarQube", "Fortify"] },
+            { name: "0day management", category: "identify", maturity: "emerging", description: "Zero-day vulnerability management - Critical CVE response", technologies: ["Rapid7", "Tenable", "Qualys", "Kenna Security"] },
 
-            // RISK & GOVERNANCE
-            { name: "Unified security by design (cloud/IT/OT/AI)", category: "risk-governance", maturity: "trending", description: "Unified security by design - Integrated security architecture", technologies: ["Fortinet Security Fabric", "Palo Alto Prisma", "Cisco SecureX", "VMware"] },
-            { name: "Cyber Sustainability", category: "risk-governance", maturity: "trending", description: "Cyber sustainability - Long-term sustainable security approach", technologies: ["Deloitte", "Accenture", "Capgemini", "KPMG"] },
-            { name: "DevSecOps", category: "risk-governance", maturity: "mature", description: "Development Security Operations - Security integration in DevOps", technologies: ["GitLab CI/CD", "GitHub Actions", "JFrog DevOps", "HashiCorp"] },
-            { name: "OT DevSecOps", category: "risk-governance", maturity: "trending", description: "OT DevSecOps - Secure development for operational systems", technologies: ["Fortinet FortiICS", "Rockwell Automation", "Schneider", "Siemens"] },
-            { name: "Smart Sourcing", category: "risk-governance", maturity: "mature", description: "Smart sourcing - Intelligent vendor/service selection", technologies: ["SAP Ariba", "Coupa", "Tradeshift", "TrustRadius"] },
-            { name: "Cyber efficiency & rationalisation", category: "risk-governance", maturity: "trending", description: "Cyber efficiency - Optimization of security investments", technologies: ["VMware Cost", "AWS Cost Explorer", "Cisco Intersight", "SolarWinds"] },
-            { name: "Talent Mgt. (Attract & retain talents)", category: "risk-governance", maturity: "mature", description: "Talent management - Cybersecurity skills acquisition and retention", technologies: ["LinkedIn Learning", "Pluralsight", "CyberDefenders", "Immersive Labs"] },
-            { name: "Real-time risk evaluation", category: "risk-governance", maturity: "trending", description: "Real-time risk evaluation - Continuous risk monitoring", technologies: ["Splunk Enterprise", "Rapid7", "Tenable Nessus", "Qualys VMDR"] },
-            { name: "Business security differentiators", category: "risk-governance", maturity: "trending", description: "Business security differentiators - Security as competitive advantage", technologies: ["Okta", "Auth0", "Ping Identity", "CyberArk"] },
-            { name: "Small entity security", category: "risk-governance", maturity: "mature", description: "Small entity security - SME-adapted security", technologies: ["Microsoft Defender", "Bitdefender", "Kaspersky", "Avast Business"] },
-            { name: "M&A security industrialization", category: "risk-governance", maturity: "mature", description: "M&A security industrialization - Standardized acquisition processes", technologies: ["Archer GRC", "AuditBoard", "RSA Governance", "Workiva"] },
-            { name: "4th party strategy", category: "risk-governance", maturity: "trending", description: "4th party strategy - Indirect vendor management", technologies: ["Whistic", "Vanta", "OneTrust", "Prevalent"] },
-            { name: "Cyber borders & decoupling", category: "risk-governance", maturity: "mature", description: "Cyber borders and decoupling - Critical system isolation", technologies: ["VMware NSX", "Cisco ACI", "Fortinet FortiGate", "Palo Alto"] },
-            { name: "Regulatory Mgt.", category: "risk-governance", maturity: "mature", description: "Regulatory management - Regulatory compliance tracking", technologies: ["MetricStream", "Workiva", "Domo", "Tableau"] },
-            { name: "Sectorial Compliance", category: "risk-governance", maturity: "mature", description: "Sectorial compliance - Sector-specific compliance", technologies: ["Archer GRC", "OneTrust", "Workiva", "AuditBoard"] },
-            { name: "Risk Quantification", category: "risk-governance", maturity: "emerging", description: "Risk quantification - Financial risk measurement", technologies: ["RiskLens", "Deloitte Analytics", "BitSight", "SecurityScorecard"] },
-            { name: "At scale 3rd party mgt.", category: "risk-governance", maturity: "mature", description: "At scale - Organization-wide security and vendor management", technologies: ["Fortinet Security", "Palo Alto Prisma", "Cisco SecureX", "CrowdStrike"] },
-            { name: "IT OT project management", category: "risk-governance", maturity: "trending", description: "IT/OT project management - Mixed environment governance", technologies: ["ServiceNow ITSM", "BMC Remedy", "Atlassian Jira", "Microsoft Project"] },
-            { name: "Agile at scale", category: "risk-governance", maturity: "mature", description: "Agile at scale - Enterprise-wide agile adoption", technologies: ["SAFe", "Jira Align", "Azure DevOps", "GitLab"] },
-            { name: "Global maturity framework", category: "risk-governance", maturity: "mature", description: "Global maturity framework - Maturity assessment framework", technologies: ["NIST", "ISO 27001", "COBIT", "ITIL"] },
-            { name: "Notification requirements (SEC/NIS/DFS)", category: "risk-governance", maturity: "mature", description: "Notification requirements - Compliance with notification rules", technologies: ["OneTrust", "Workiva", "AuditBoard", "RSA"] },
-            { name: "Immersive awareness", category: "risk-governance", maturity: "trending", description: "Immersive awareness - Interactive cybersecurity training", technologies: ["Immersive Labs", "KnowBe4", "Proofpoint", "Infosec"] },
-            { name: "Sustainability in cyber", category: "risk-governance", maturity: "emerging", description: "Sustainability in cybersecurity - Sustainable security approach", technologies: ["Deloitte", "Accenture", "Capgemini", "KPMG"] },
-            { name: "Culture change", category: "risk-governance", maturity: "trending", description: "Culture change - Security culture transformation", technologies: ["LinkedIn Learning", "Coursera", "Udemy", "CyberDefenders"] },
+            // PROTECT (PR) - Security Controls and Safeguards
+            { name: "Supply chain security", category: "protect", maturity: "trending", description: "Supply chain security - Protection of software dependencies", technologies: ["Snyk", "BlackDuck", "Sonatype Nexus", "Checkmarx", "WhiteSource"] },
+            { name: "S-SDLC (Secure Software Development Lifecycle)", category: "protect", maturity: "mature", description: "Secure software development lifecycle - Security integration in DevOps", technologies: ["GitLab DevSecOps", "GitHub Advanced Security", "Synopsys", "Checkmarx"] },
+            { name: "Containers security", category: "protect", maturity: "trending", description: "Container security - Docker/Kubernetes protection", technologies: ["Docker Security", "Kubernetes Security", "Aqua Security", "Twistlock"] },
+            { name: "CNAPP (Cloud-Native Application Protection)", category: "protect", maturity: "emerging", description: "Cloud-native application protection - Kubernetes security", technologies: ["Snyk", "Aqua", "Palo Alto Prisma", "Wiz"] },
 
-            // COMPLIANCE & PRIVACY
-            { name: "Unified compliance strategy & framework", category: "compliance-privacy", maturity: "mature", description: "Unified compliance strategy - Integrated approach", technologies: ["OneTrust", "Workiva", "Archer GRC", "AuditBoard"] },
-            { name: "AI Act", category: "compliance-privacy", maturity: "trending", description: "AI Act (EU) - Artificial intelligence regulation", technologies: ["Deloitte AI Governance", "IBM AI Risk", "Accenture AI", "Capgemini"] },
-            { name: "DORA (Digital Operational Resilience Act)", category: "compliance-privacy", maturity: "trending", description: "Digital operational resilience - Financial institutions regulation", technologies: ["Fortinet FortiSOC", "Splunk ES", "IBM QRadar", "Elastic"] },
-            { name: "CRA/Product (Cyber Resilience Act)", category: "compliance-privacy", maturity: "trending", description: "Cyber Resilience Act - Product resilience requirements", technologies: ["Synopsys", "Checkmarx", "Rapid7", "Tenable"] },
-            { name: "Critical Infra NIS2/REC", category: "compliance-privacy", maturity: "mature", description: "Critical infrastructure NIS2/REC - Critical infrastructure directive", technologies: ["Fortinet FortiManager", "Qualys VMDR", "Tenable", "Rapid7"] },
-            { name: "Privacy management", category: "compliance-privacy", maturity: "mature", description: "Privacy management - Privacy by design and GDPR", technologies: ["OneTrust", "TrustArc", "IBM Privacy", "BigID"] },
-            { name: "Compliance assurance", category: "compliance-privacy", maturity: "mature", description: "Compliance assurance - Compliance verification and audit", technologies: ["Workiva", "AuditBoard", "Archer GRC", "MetricStream"] },
-            { name: "By design compliance, resilience & security", category: "compliance-privacy", maturity: "trending", description: "Security by design - Security by design approach", technologies: ["ServiceNow", "Workiva", "OneTrust", "Archer"] },
-            { name: "BIA (Business Impact Analysis)", category: "compliance-privacy", maturity: "mature", description: "Business impact analysis - Security impact assessment", technologies: ["Archer GRC", "MetricStream", "AuditBoard", "Domo"] },
-            { name: "Critical business services ex. / MVC", category: "compliance-privacy", maturity: "mature", description: "Critical services and vital functions - Identification and protection", technologies: ["ServiceNow CMDB", "BMC CMDB", "AWS Systems Manager", "Atlassian"] },
-            { name: "OpRes Regulations", category: "compliance-privacy", maturity: "trending", description: "Operational resilience regulations - New rules compliance", technologies: ["Fortinet", "Splunk", "Elastic", "Datadog"] },
-            { name: "Synthetic data & anonymization", category: "compliance-privacy", maturity: "emerging", description: "Synthetic data and anonymization - Sensitive data protection", technologies: ["Mostly AI", "Tonic.ai", "Gretel", "BigID"] },
-            { name: "Workforce resilience", category: "compliance-privacy", maturity: "trending", description: "Workforce resilience - Personnel availability and continuity", technologies: ["LinkedIn Learning", "Skillsoft", "Coursera", "edX"] },
-            { name: "Multi-cloud continuity", category: "compliance-privacy", maturity: "mature", description: "Multi-cloud continuity - Portability and resilience between clouds", technologies: ["AWS", "Azure", "Google Cloud", "HashiCorp Terraform"] },
+            // DETECT (DE) - Continuous Monitoring and Detection
+            { name: "Security data hub", category: "detect", maturity: "trending", description: "Security data hub - Centralized aggregation of security data", technologies: ["Splunk Enterprise", "Elasticsearch", "Datadog", "AWS Security Lake", "Chronicle"] },
+            { name: "Deception", category: "detect", maturity: "trending", description: "Deception technology - Intrusion detection technique using deception", technologies: ["Deception Point", "Trapx Security", "Illusive Networks", "GuardiCore"] },
+            { name: "Business App surveillance", category: "detect", maturity: "mature", description: "Business application monitoring - Surveillance of critical applications", technologies: ["Dynatrace", "New Relic", "Splunk APM", "DataDog APM", "AppDynamics"] },
+            { name: "Auto Secret detection", category: "detect", maturity: "trending", description: "Automatic secret detection - Identification of exposed credentials", technologies: ["GitGuardian", "TruffleHog", "AWS Secrets Manager", "HashiCorp Vault"] },
+            { name: "Detection engineering", category: "detect", maturity: "trending", description: "Detection engineering - Design of advanced detection rules", technologies: ["Splunk ES", "Elastic Security", "CrowdStrike Falcon", "Carbon Black"] },
+            { name: "AI for security", category: "detect", maturity: "trending", description: "AI for security - AI use in threat detection", technologies: ["Darktrace", "Vectra AI", "Fortinet AI", "CrowdStrike AI", "Securonix"] },
+            { name: "OT probe", category: "detect", maturity: "mature", description: "OT probe - Sensor for operational system monitoring", technologies: ["Claroty", "Fortinet FortiOT", "Tenable OT", "Nozomi Networks"] },
+            { name: "Threat Intelligence Platform", category: "detect", maturity: "mature", description: "Threat intelligence platform - Threat aggregation and analysis", technologies: ["MISP", "ThreatStream", "Recorded Future", "CrowdStrike Intelligence"] },
+            { name: "XDR (Extended Detection and Response)", category: "detect", maturity: "trending", description: "Extended detection and response - Multi-layer correlation", technologies: ["CrowdStrike XDR", "Microsoft Defender XDR", "Palo Alto Cortex XDR", "Sophos XDR"] },
+            { name: "AD monitoring", category: "detect", maturity: "mature", description: "Active Directory monitoring - AD access surveillance", technologies: ["Delinea Secret Server", "Microsoft Sentinel", "Quest Privilege Manager", "BeyondTrust"] },
+            { name: "Cloud based SIEM", category: "detect", maturity: "mature", description: "Cloud-based SIEM - Centralized cloud solution", technologies: ["Splunk Cloud", "Elastic Cloud", "IBM QRadar Cloud", "Fortinet FortiSOC"] },
+            { name: "EDR (Endpoint Detection and Response)", category: "detect", maturity: "mature", description: "Endpoint detection and response - Workstation protection", technologies: ["CrowdStrike Falcon", "Microsoft Defender", "Carbon Black", "SentinelOne", "Cybereason"] },
+            { name: "Fusion centers (IT/OT/Fraud)", category: "detect", maturity: "trending", description: "Fusion centers - Integration of operations", technologies: ["Splunk Fusion", "ServiceNow", "Fortinet FortiSOC", "Elastic Fusion"] },
 
-            // OPERATIONAL RESILIENCE  
-            { name: "DRP (Disaster Recovery Plan)", category: "operational-resilience", maturity: "mature", description: "Disaster recovery plan - Business continuity", technologies: ["Zerto", "IBM Spectrum", "Dell EMC RecoverPoint", "Veeam"] },
-            { name: "Red button (Kill switch)", category: "operational-resilience", maturity: "mature", description: "Kill switch - Emergency shutdown procedure", technologies: ["Fortinet FortiGate", "Cisco ISE", "Palo Alto", "Juniper"] },
-            { name: "WORM/Airgap storage & backup (Immutable backups)", category: "operational-resilience", maturity: "mature", description: "Immutable storage and isolated backup - Ransomware protection", technologies: ["Veeam Immutable", "Commvault", "Veritas", "IBM Spectrum"] },
-            { name: "Resilience", category: "operational-resilience", maturity: "mature", description: "Resilience - Quick incident recovery capability", technologies: ["Splunk ES", "Elastic Stack", "Datadog", "New Relic"] },
-            { name: "OT Resilience", category: "operational-resilience", maturity: "mature", description: "OT resilience - Operational and industrial system resilience", technologies: ["Fortinet FortiICS", "Claroty", "Tenable OT", "Nozomi"] },
-            { name: "Stress test incl. 3rd party", category: "operational-resilience", maturity: "mature", description: "Stress testing - Verification with third parties", technologies: ["Gremlin", "Chaos Mesh", "Locust", "JMeter"] },
-            { name: "Crisis management", category: "operational-resilience", maturity: "mature", description: "Crisis management - Critical security incident management", technologies: ["ServiceNow", "Splunk", "Elastic", "AWS DR"] },
-            { name: "Cyber vault", category: "operational-resilience", maturity: "mature", description: "Cyber vault - Protected and isolated critical data", technologies: ["Veeam Backup", "CommVault", "IBM Spectrum", "Dell EMC"] },
-            { name: "Fast IS rebuilding", category: "operational-resilience", maturity: "trending", description: "Fast IT infrastructure rebuilding - Accelerated recovery", technologies: ["VMware Site Recovery", "AWS DRS", "Zerto", "IBM Spectrum"] },
-            { name: "Cloud erasure resilience", category: "operational-resilience", maturity: "emerging", description: "Cloud data deletion resilience - Cloud data protection", technologies: ["Veeam", "Commvault", "AWS Backup", "Azure Backup"] },
-            { name: "Resilience management tooling", category: "operational-resilience", maturity: "mature", description: "Resilience management tools - BC/DR management platforms", technologies: ["Splunk ES", "IBM Maximo", "ServiceNow", "Domo"] },
-            { name: "Resilience culture", category: "operational-resilience", maturity: "trending", description: "Resilience culture - Organizational resilience mindset", technologies: ["LinkedIn Learning", "Coursera", "Udemy", "Pluralsight"] },
-            { name: "Incident Recovery Env.", category: "operational-resilience", maturity: "mature", description: "Incident recovery environment - Recovery infrastructure", technologies: ["Zerto", "VMware Site", "AWS DRS", "Azure Site"] },
-            { name: "Supply chain resilience", category: "operational-resilience", maturity: "trending", description: "Supply chain resilience - Vendor continuity", technologies: ["SAP Ariba", "Coupa", "Tradeshift", "Resilinc"] },
-            { name: "Unified customer privacy rights", category: "operational-resilience", maturity: "emerging", description: "Unified customer privacy rights - Privacy rights harmonization", technologies: ["OneTrust", "TrustArc", "BigID", "Crunch"] },
+            // RESPOND (RS) - Incident Response and Mitigation
+            { name: "Automated IR playbook", category: "respond", maturity: "trending", description: "Automated incident response playbook - Response automation", technologies: ["Splunk SOAR", "Demisto", "Siemplify", "Swimlane"] },
+            { name: "SOAR (Security Orchestration, Automation and Response)", category: "respond", maturity: "mature", description: "Security orchestration and automation - Incident response automation", technologies: ["Splunk SOAR", "Demisto", "Siemplify", "ServiceNow SecOps"] },
 
-            // TRUST SERVICES
-            { name: "OPC UA", category: "trust-services", maturity: "mature", description: "OPC Unified Architecture - Secure IT/OT communication standard", technologies: ["Kepware", "Ignition", "Wonderware", "FactoryTalk"] },
-            { name: "PLC code security", category: "trust-services", maturity: "mature", description: "PLC code security - OT automation code protection", technologies: ["Fortinet FortiICS", "Claroty", "Tenable OT", "CyberArk"] },
-            { name: "Confidential computing", category: "trust-services", maturity: "trending", description: "Confidential computing - Data encryption in use", technologies: ["Intel SGX", "AMD SEV", "Azure Confidential", "AWS Nitro"] },
-            { name: "AI red teaming", category: "trust-services", maturity: "emerging", description: "AI red teaming - Adversarial testing for AI models", technologies: ["OpenAI", "Anthropic", "DeepMind", "Microsoft Research"] },
-            { name: "Deep fake protection", category: "trust-services", maturity: "emerging", description: "Deepfake protection - Deepfake detection and prevention", technologies: ["Microsoft Video Auth", "Adobe Content Creds", "Reality Defender", "Sensetime"] },
-            { name: "Containers (Docker/Kubernetes security)", category: "trust-services", maturity: "mature", description: "Container security - Secure containerization technology", technologies: ["Docker", "Kubernetes", "Podman", "OpenShift"] },
-            { name: "Tech debt mgt.", category: "trust-services", maturity: "trending", description: "Technical debt management - Technical debt reduction", technologies: ["SonarQube", "Veracode", "Checkmarx", "Fortify"] },
-            { name: "Extended tier 0", category: "trust-services", maturity: "trending", description: "Extended tier 0 - Extended privileged governance to OT/Cloud", technologies: ["CyberArk", "Delinea", "BeyondTrust", "HashiCorp"] },
-            { name: "API security", category: "trust-services", maturity: "mature", description: "API security - Application interface protection", technologies: ["Apigee", "Kong", "Mulesoft", "AWS API Gateway"] },
-            { name: "Zero trust enabled app.", category: "trust-services", maturity: "trending", description: "Zero trust enabled applications - Zero trust model implementation", technologies: ["Okta", "Google Zero Trust", "Microsoft Entra", "CyberArk"] },
-            { name: "Zero trust metrics", category: "trust-services", maturity: "mature", description: "Zero trust metrics - Zero trust implementation KPIs", technologies: ["Splunk", "Datadog", "New Relic", "Dynatrace"] },
-            { name: "Crypto agility", category: "trust-services", maturity: "trending", description: "Cryptographic agility - Cryptographic algorithm flexibility", technologies: ["HashiCorp Vault", "AWS KMS", "Azure Key Vault", "Thales Luna"] },
-            { name: "Homomorphic encryption", category: "trust-services", maturity: "emerging", description: "Homomorphic encryption - Computation on encrypted data", technologies: ["Microsoft SEAL", "Zama", "Duality", "IBM HElib"] },
-            { name: "Post Quantum Crypto", category: "trust-services", maturity: "emerging", description: "Post-quantum cryptography - Quantum-resistant cryptography", technologies: ["NIST PQC", "LibOQS", "Google Quantum", "Microsoft PQ"] },
-            { name: "Device bound tokens & Passkeys", category: "trust-services", maturity: "trending", description: "Device-bound tokens - Strong device-tied authentication", technologies: ["Windows Hello", "Passkeys", "Duo", "Auth0"] },
-            { name: "Passwordless authentication", category: "trust-services", maturity: "trending", description: "Passwordless authentication - FIDO2 and alternatives", technologies: ["FIDO2", "Windows Hello", "Yubico", "Okta"] },
-            { name: "CIAM B2B2C (Customer Identity & Access Management)", category: "trust-services", maturity: "mature", description: "Customer identity and access management - Unified customer identity", technologies: ["Okta", "Auth0", "Ping Identity", "CyberArk"] },
-            { name: "Zero Standing Privilege (ZSP)", category: "trust-services", maturity: "trending", description: "Zero standing privilege - Just-in-time privileged access", technologies: ["CyberArk PAM", "BeyondTrust", "Delinea", "HashiCorp"] },
-            { name: "Attribute Access Control (ABAC)", category: "trust-services", maturity: "mature", description: "Attribute-based access control - Context-based granular access", technologies: ["Axiomatics", "Ping Identity", "Okta", "AWS IAM"] },
-            { name: "SAP IDM end of life", category: "trust-services", maturity: "mature", description: "SAP IDM migration - End of life and migration", technologies: ["Okta", "Ping Identity", "Azure AD", "One Identity"] },
-            { name: "IAM orchestration", category: "trust-services", maturity: "mature", description: "IAM orchestration - Identity/access workflow automation", technologies: ["Okta Workflows", "SailPoint", "One Identity", "Ping"] },
-            { name: "Unstructured data access", category: "trust-services", maturity: "mature", description: "Unstructured data access - File/data access control", technologies: ["BigID", "Varonis", "IBM Security", "Imperva"] },
-            { name: "Decentralized identities (Self-sovereign identity)", category: "trust-services", maturity: "emerging", description: "Decentralized identities - SSI and blockchain solutions", technologies: ["Sovrin", "NIST DID", "Indy", "VerifiableCredentials"] },
-            { name: "CI/CD for IAM (CICD4IAM)", category: "trust-services", maturity: "trending", description: "CI/CD for IAM - IAM automation in DevOps", technologies: ["GitLab", "GitHub", "Azure DevOps", "Terraform"] },
-            { name: "Non-Human Identities", category: "trust-services", maturity: "trending", description: "Non-human identities - Machine/service access management", technologies: ["CyberArk PAM", "HashiCorp Consul", "Kubernetes RBAC", "AWS IAM"] },
-            { name: "AI for IAM", category: "trust-services", maturity: "emerging", description: "AI for IAM - ML-based identity anomaly detection", technologies: ["Okta AI", "Ping AI", "Azure AD AI", "Darktrace IAM"] },
-            { name: "Phishing resistant authentication", category: "trust-services", maturity: "trending", description: "Phishing-resistant authentication - FIDO2 and advanced MFA", technologies: ["FIDO2", "Windows Hello", "Duo", "Yubico"] },
-            { name: "Predictive anti-fraud", category: "trust-services", maturity: "mature", description: "Predictive anti-fraud - AI-based fraud detection", technologies: ["RSA Archer", "Feedzai", "Kount", "Riskified"] },
-            { name: "Account takeover protection", category: "trust-services", maturity: "mature", description: "Account takeover protection - Compromised account defense", technologies: ["Okta Insights", "Ping Identity", "CyberArk", "Auth0"] },
-            { name: "Identity Analytics", category: "trust-services", maturity: "mature", description: "Identity analytics - Access behavior analysis", technologies: ["Splunk", "Azure AD Analytics", "Okta Analytics", "Ping"] },
-            { name: "Adaptive authentication", category: "trust-services", maturity: "mature", description: "Adaptive authentication - Context and risk-based auth", technologies: ["Okta", "Auth0", "Microsoft Entra", "Ping Identity"] },
-            { name: "Modern authentication", category: "trust-services", maturity: "mature", description: "Modern authentication - Modern authentication approaches", technologies: ["OAuth2", "OIDC", "SAML 2.0", "JWT"] },
-            { name: "Continuous Access Evaluation (CAE)", category: "trust-services", maturity: "trending", description: "Continuous access evaluation - Real-time access re-evaluation", technologies: ["Microsoft Entra CAE", "Okta", "Azure AD", "Ping"] },
-            { name: "Continuous Identity", category: "trust-services", maturity: "emerging", description: "Continuous identity verification - Ongoing identity validation and behavioral analysis based on NIST Zero Trust principles", technologies: ["Microsoft Entra", "Okta Identity Threat Protection", "Ping Intelligence", "CyberArk Identity"] },
-            { name: "IIT Provisioning", category: "trust-services", maturity: "trending", description: "Just-in-time provisioning - Automated temporary access", technologies: ["Okta", "SailPoint", "Ping Identity", "One Identity"] },
-            { name: "Third Party Access Management (Third PartyNAM)", category: "trust-services", maturity: "trending", description: "Third-party access management - Secure external partner access", technologies: ["Okta B2B", "Auth0", "Ping CIAM", "CyberArk"] },
-            { name: "MFA (Multi-Factor Authentication)", category: "trust-services", maturity: "mature", description: "Multi-factor authentication - Standard MFA", technologies: ["Duo Security", "Okta MFA", "Microsoft MFA", "Google Authenticator"] },
-            { name: "PKI (Public Key Infrastructure)", category: "trust-services", maturity: "mature", description: "Public key infrastructure - Digital certificate management", technologies: ["Thales HSM", "Venafi", "Sectigo", "GlobalSign"] },
-            { name: "KMS (Key Management System)", category: "trust-services", maturity: "mature", description: "Key management system - Centralized key management", technologies: ["AWS KMS", "Azure Key Vault", "Thales Luna", "Google Cloud KMS"] },
-            { name: "OAuth2 & Identity Federation", category: "trust-services", maturity: "mature", description: "OAuth 2.0 and identity federation - Authorization and federation standards", technologies: ["Auth0", "Okta", "Ping Identity", "Microsoft Entra"] },
-            { name: "Certificate Lifecycle Management", category: "trust-services", maturity: "mature", description: "Certificate lifecycle management - Automated renewal", technologies: ["Venafi", "Sectigo", "DigiCert", "GlobalSign"] },
-            { name: "IAG & SoD (Identity Access Governance & Segregation of Duties)", category: "trust-services", maturity: "mature", description: "Access governance and duty separation - Privilege control", technologies: ["SailPoint", "Okta", "One Identity", "Ping"] },
-            { name: "IAMaaS (IAM as a Service)", category: "trust-services", maturity: "mature", description: "IAM as a service - Cloud-native IAM solution", technologies: ["Okta", "Auth0", "Azure AD", "Ping Identity"] },
-            { name: "IAM of Things", category: "trust-services", maturity: "trending", description: "IAM for IoT - Connected device identity management", technologies: ["Azure IoT", "AWS IoT Core", "Google Cloud IoT", "Cisco IoT"] },
-            { name: "Converged identity platform", category: "trust-services", maturity: "mature", description: "Converged identity platform - Unified identity solution", technologies: ["Okta", "Ping Identity", "SailPoint", "One Identity"] },
-            { name: "ID Threat DR (Identity Threat Disaster Recovery)", category: "trust-services", maturity: "trending", description: "Identity disaster recovery - Identity system recovery", technologies: ["Azure AD B2B", "Okta", "Ping Identity", "One Identity"] },
-            { name: "CIO ID Officer", category: "trust-services", maturity: "emerging", description: "Chief Identity Officer - Executive-level identity responsibility", technologies: ["Okta", "SailPoint", "Ping Identity", "Microsoft"] },
-            { name: "Extended enterprise IAM", category: "trust-services", maturity: "mature", description: "Extended enterprise IAM - Partner/external identity management", technologies: ["Okta", "Auth0", "Azure AD B2B", "Ping Identity"] },
-            { name: "AD redesign (AD Exit & Entra ID redesign)", category: "trust-services", maturity: "trending", description: "Active Directory migration - Transition to Entra ID", technologies: ["Microsoft Entra", "Azure AD", "Okta", "Delinea"] },
-            { name: "eiDAS", category: "trust-services", maturity: "mature", description: "Electronic Identification Authentication - EU eIDAS regulation", technologies: ["Sector", "Thales", "Gemalto", "Safenet"] },
-            { name: "PAM (Privileged Access Management)", category: "trust-services", maturity: "mature", description: "Privileged access management - Privileged account control", technologies: ["CyberArk", "BeyondTrust", "Delinea", "HashiCorp"] },
-            { name: "TOM IAM (Target Operating Model)", category: "trust-services", maturity: "mature", description: "IAM target operating model - IAM architecture and governance", technologies: ["SailPoint", "Okta", "Ping Identity", "One Identity"] },
-            { name: "Customer IAM", category: "trust-services", maturity: "mature", description: "Customer identity and access management - Customer identity", technologies: ["Okta CIAM", "Auth0", "Ping Identity", "Microsoft B2C"] },
-            { name: "Mainframe Identity", category: "trust-services", maturity: "mature", description: "Mainframe identity - Mainframe access management", technologies: ["CA Identity", "Delinea", "Okta", "One Identity"] },
-            { name: "Centralized password grain auth.", category: "trust-services", maturity: "trending", description: "Centralized password grain authentication - Granular authentication", technologies: ["Okta", "Ping Identity", "Azure AD", "Auth0"] },
-            { name: "DDoS prot. (DDoS Protection)", category: "trust-services", maturity: "mature", description: "DDoS protection - Denial of service mitigation", technologies: ["Cloudflare", "Akamai", "AWS Shield", "Radware"] },
-            { name: "DRM/DLP (Digital Rights & Data Loss Prevention)", category: "trust-services", maturity: "mature", description: "Digital rights and data loss prevention - Data protection", technologies: ["Microsoft RMS", "Varonis", "Imperva", "Forcepoint"] },
-            { name: "Micro segmentation", category: "trust-services", maturity: "mature", description: "Micro-segmentation - Granular network segmentation", technologies: ["VMware NSX", "Cisco ACI", "Fortinet", "Palo Alto"] },
-            { name: "Secure administration", category: "trust-services", maturity: "mature", description: "Secure administration - Secure administrative access", technologies: ["CyberArk PAM", "BeyondTrust", "Delinea", "HashiCorp"] },
-            { name: "Serverless apps security", category: "trust-services", maturity: "emerging", description: "Serverless applications security - Serverless function security", technologies: ["AWS Lambda Security", "Azure Functions", "Google Cloud Functions"] },
-            { name: "AI copilot security", category: "trust-services", maturity: "emerging", description: "AI copilot security - AI assistant security", technologies: ["Microsoft Copilot", "GitHub Copilot", "Tabnine", "Amazon CodeWhisperer"] },
-            { name: "Automatic data classification", category: "trust-services", maturity: "trending", description: "Automatic data classification - Classification automation", technologies: ["Microsoft Purview", "AWS Macie", "BigID", "Varonis"] },
-            { name: "SCADA Virtualization", category: "trust-services", maturity: "emerging", description: "SCADA virtualization - SCADA/OT system virtualization", technologies: ["Fortinet", "VMware", "Hyper-V", "KVM"] },
-            { name: "Cloud first IAM", category: "trust-services", maturity: "trending", description: "Cloud-first IAM - Cloud-first IAM approach", technologies: ["Okta", "Azure AD", "Ping Identity", "Auth0"] },
-            { name: "Cross channels front-end", category: "trust-services", maturity: "trending", description: "Multi-channel front-end - Unified multi-channel access", technologies: ["Okta", "Ping Identity", "Auth0", "CyberArk"] },
+            // GOVERN (GV) - Governance, Risk Management, and Compliance
+            { name: "Cyber range", category: "govern", maturity: "mature", description: "Cyber range - Cybersecurity training environment", technologies: ["Immersive Labs", "HackTheBox", "TryHackMe", "Cybrary"] },
+            { name: "ISMS (Information Security Management System)", category: "govern", maturity: "mature", description: "Information security management system - Integrated governance", technologies: ["Archer GRC", "Qualys VMDR", "ZenGRC", "AuditBoard"] },
+            { name: "Service catalog", category: "govern", maturity: "mature", description: "Service catalog - IT/security services inventory", technologies: ["ServiceNow ITSM", "BMC Remedy", "Jira Service Management"] },
+
+            { name: "Unified security by design (cloud/IT/OT/AI)", category: "govern", maturity: "trending", description: "Unified security by design - Integrated security architecture", technologies: ["Fortinet Security Fabric", "Palo Alto Prisma", "Cisco SecureX", "VMware"] },
+            { name: "Cyber Sustainability", category: "govern", maturity: "trending", description: "Cyber sustainability - Long-term sustainable security approach", technologies: ["Deloitte", "Accenture", "Capgemini", "KPMG"] },
+            { name: "DevSecOps", category: "govern", maturity: "mature", description: "Development Security Operations - Security integration in DevOps", technologies: ["GitLab CI/CD", "GitHub Actions", "JFrog DevOps", "HashiCorp"] },
+            { name: "OT DevSecOps", category: "govern", maturity: "trending", description: "OT DevSecOps - Secure development for operational systems", technologies: ["Fortinet FortiICS", "Rockwell Automation", "Schneider", "Siemens"] },
+            { name: "Smart Sourcing", category: "govern", maturity: "mature", description: "Smart sourcing - Intelligent vendor/service selection", technologies: ["SAP Ariba", "Coupa", "Tradeshift", "TrustRadius"] },
+            { name: "Cyber efficiency & rationalisation", category: "govern", maturity: "trending", description: "Cyber efficiency - Optimization of security investments", technologies: ["VMware Cost", "AWS Cost Explorer", "Cisco Intersight", "SolarWinds"] },
+            { name: "Talent Mgt. (Attract & retain talents)", category: "govern", maturity: "mature", description: "Talent management - Cybersecurity skills acquisition and retention", technologies: ["LinkedIn Learning", "Pluralsight", "CyberDefenders", "Immersive Labs"] },
+            { name: "Real-time risk evaluation", category: "govern", maturity: "trending", description: "Real-time risk evaluation - Continuous risk monitoring", technologies: ["Splunk Enterprise", "Rapid7", "Tenable Nessus", "Qualys VMDR"] },
+            { name: "Business security differentiators", category: "govern", maturity: "trending", description: "Business security differentiators - Security as competitive advantage", technologies: ["Okta", "Auth0", "Ping Identity", "CyberArk"] },
+            { name: "Small entity security", category: "govern", maturity: "mature", description: "Small entity security - SME-adapted security", technologies: ["Microsoft Defender", "Bitdefender", "Kaspersky", "Avast Business"] },
+            { name: "M&A security industrialization", category: "govern", maturity: "mature", description: "M&A security industrialization - Standardized acquisition processes", technologies: ["Archer GRC", "AuditBoard", "RSA Governance", "Workiva"] },
+            { name: "4th party strategy", category: "govern", maturity: "trending", description: "4th party strategy - Indirect vendor management", technologies: ["Whistic", "Vanta", "OneTrust", "Prevalent"] },
+            { name: "Cyber borders & decoupling", category: "govern", maturity: "mature", description: "Cyber borders and decoupling - Critical system isolation", technologies: ["VMware NSX", "Cisco ACI", "Fortinet FortiGate", "Palo Alto"] },
+            { name: "Regulatory Mgt.", category: "govern", maturity: "mature", description: "Regulatory management - Regulatory compliance tracking", technologies: ["MetricStream", "Workiva", "Domo", "Tableau"] },
+            { name: "Sectorial Compliance", category: "govern", maturity: "mature", description: "Sectorial compliance - Sector-specific compliance", technologies: ["Archer GRC", "OneTrust", "Workiva", "AuditBoard"] },
+            { name: "Risk Quantification", category: "govern", maturity: "emerging", description: "Risk quantification - Financial risk measurement", technologies: ["RiskLens", "Deloitte Analytics", "BitSight", "SecurityScorecard"] },
+            { name: "At scale 3rd party mgt.", category: "govern", maturity: "mature", description: "At scale - Organization-wide security and vendor management", technologies: ["Fortinet Security", "Palo Alto Prisma", "Cisco SecureX", "CrowdStrike"] },
+            { name: "IT OT project management", category: "govern", maturity: "trending", description: "IT/OT project management - Mixed environment governance", technologies: ["ServiceNow ITSM", "BMC Remedy", "Atlassian Jira", "Microsoft Project"] },
+            { name: "Agile at scale", category: "govern", maturity: "mature", description: "Agile at scale - Enterprise-wide agile adoption", technologies: ["SAFe", "Jira Align", "Azure DevOps", "GitLab"] },
+            { name: "Global maturity framework", category: "govern", maturity: "mature", description: "Global maturity framework - Maturity assessment framework", technologies: ["NIST", "ISO 27001", "COBIT", "ITIL"] },
+            { name: "Notification requirements (SEC/NIS/DFS)", category: "govern", maturity: "mature", description: "Notification requirements - Compliance with notification rules", technologies: ["OneTrust", "Workiva", "AuditBoard", "RSA"] },
+            { name: "Immersive awareness", category: "govern", maturity: "trending", description: "Immersive awareness - Interactive cybersecurity training", technologies: ["Immersive Labs", "KnowBe4", "Proofpoint", "Infosec"] },
+            { name: "Sustainability in cyber", category: "govern", maturity: "emerging", description: "Sustainability in cybersecurity - Sustainable security approach", technologies: ["Deloitte", "Accenture", "Capgemini", "KPMG"] },
+            { name: "Culture change", category: "govern", maturity: "trending", description: "Culture change - Security culture transformation", technologies: ["LinkedIn Learning", "Coursera", "Udemy", "CyberDefenders"] },
+
+            { name: "Unified compliance strategy & framework", category: "govern", maturity: "mature", description: "Unified compliance strategy - Integrated approach", technologies: ["OneTrust", "Workiva", "Archer GRC", "AuditBoard"] },
+            { name: "AI Act", category: "govern", maturity: "trending", description: "AI Act (EU) - Artificial intelligence regulation", technologies: ["Deloitte AI Governance", "IBM AI Risk", "Accenture AI", "Capgemini"] },
+            { name: "DORA (Digital Operational Resilience Act)", category: "govern", maturity: "trending", description: "Digital operational resilience - Financial institutions regulation", technologies: ["Fortinet FortiSOC", "Splunk ES", "IBM QRadar", "Elastic"] },
+            { name: "CRA/Product (Cyber Resilience Act)", category: "govern", maturity: "trending", description: "Cyber Resilience Act - Product resilience requirements", technologies: ["Synopsys", "Checkmarx", "Rapid7", "Tenable"] },
+            { name: "Critical Infra NIS2/REC", category: "govern", maturity: "mature", description: "Critical infrastructure NIS2/REC - Critical infrastructure directive", technologies: ["Fortinet FortiManager", "Qualys VMDR", "Tenable", "Rapid7"] },
+            { name: "Privacy management", category: "govern", maturity: "mature", description: "Privacy management - Privacy by design and GDPR", technologies: ["OneTrust", "TrustArc", "IBM Privacy", "BigID"] },
+            { name: "Compliance assurance", category: "govern", maturity: "mature", description: "Compliance assurance - Compliance verification and audit", technologies: ["Workiva", "AuditBoard", "Archer GRC", "MetricStream"] },
+            { name: "By design compliance, resilience & security", category: "govern", maturity: "trending", description: "Security by design - Security by design approach", technologies: ["ServiceNow", "Workiva", "OneTrust", "Archer"] },
+            { name: "BIA (Business Impact Analysis)", category: "govern", maturity: "mature", description: "Business impact analysis - Security impact assessment", technologies: ["Archer GRC", "MetricStream", "AuditBoard", "Domo"] },
+            { name: "Critical business services ex. / MVC", category: "govern", maturity: "mature", description: "Critical services and vital functions - Identification and protection", technologies: ["ServiceNow CMDB", "BMC CMDB", "AWS Systems Manager", "Atlassian"] },
+            { name: "OpRes Regulations", category: "govern", maturity: "trending", description: "Operational resilience regulations - New rules compliance", technologies: ["Fortinet", "Splunk", "Elastic", "Datadog"] },
+            { name: "Synthetic data & anonymization", category: "govern", maturity: "emerging", description: "Synthetic data and anonymization - Sensitive data protection", technologies: ["Mostly AI", "Tonic.ai", "Gretel", "BigID"] },
+            { name: "Workforce resilience", category: "govern", maturity: "trending", description: "Workforce resilience - Personnel availability and continuity", technologies: ["LinkedIn Learning", "Skillsoft", "Coursera", "edX"] },
+            { name: "Multi-cloud continuity", category: "govern", maturity: "mature", description: "Multi-cloud continuity - Portability and resilience between clouds", technologies: ["AWS", "Azure", "Google Cloud", "HashiCorp Terraform"] },
+
+            // RECOVER (RC) - Recovery Planning and Improvements
+            { name: "DRP (Disaster Recovery Plan)", category: "recover", maturity: "mature", description: "Disaster recovery plan - Business continuity", technologies: ["Zerto", "IBM Spectrum", "Dell EMC RecoverPoint", "Veeam"] },
+            { name: "Red button (Kill switch)", category: "recover", maturity: "mature", description: "Kill switch - Emergency shutdown procedure", technologies: ["Fortinet FortiGate", "Cisco ISE", "Palo Alto", "Juniper"] },
+            { name: "WORM/Airgap storage & backup (Immutable backups)", category: "recover", maturity: "mature", description: "Immutable storage and isolated backup - Ransomware protection", technologies: ["Veeam Immutable", "Commvault", "Veritas", "IBM Spectrum"] },
+            { name: "Resilience", category: "recover", maturity: "mature", description: "Resilience - Quick incident recovery capability", technologies: ["Splunk ES", "Elastic Stack", "Datadog", "New Relic"] },
+            { name: "OT Resilience", category: "recover", maturity: "mature", description: "OT resilience - Operational and industrial system resilience", technologies: ["Fortinet FortiICS", "Claroty", "Tenable OT", "Nozomi"] },
+            { name: "Stress test incl. 3rd party", category: "recover", maturity: "mature", description: "Stress testing - Verification with third parties", technologies: ["Gremlin", "Chaos Mesh", "Locust", "JMeter"] },
+            { name: "Crisis management", category: "recover", maturity: "mature", description: "Crisis management - Critical security incident management", technologies: ["ServiceNow", "Splunk", "Elastic", "AWS DR"] },
+            { name: "Cyber vault", category: "recover", maturity: "mature", description: "Cyber vault - Protected and isolated critical data", technologies: ["Veeam Backup", "CommVault", "IBM Spectrum", "Dell EMC"] },
+            { name: "Fast IS rebuilding", category: "recover", maturity: "trending", description: "Fast IT infrastructure rebuilding - Accelerated recovery", technologies: ["VMware Site Recovery", "AWS DRS", "Zerto", "IBM Spectrum"] },
+            { name: "Cloud erasure resilience", category: "recover", maturity: "emerging", description: "Cloud data deletion resilience - Cloud data protection", technologies: ["Veeam", "Commvault", "AWS Backup", "Azure Backup"] },
+            { name: "Resilience management tooling", category: "recover", maturity: "mature", description: "Resilience management tools - BC/DR management platforms", technologies: ["Splunk ES", "IBM Maximo", "ServiceNow", "Domo"] },
+            { name: "Resilience culture", category: "recover", maturity: "trending", description: "Resilience culture - Organizational resilience mindset", technologies: ["LinkedIn Learning", "Coursera", "Udemy", "Pluralsight"] },
+            { name: "Incident Recovery Env.", category: "recover", maturity: "mature", description: "Incident recovery environment - Recovery infrastructure", technologies: ["Zerto", "VMware Site", "AWS DRS", "Azure Site"] },
+            { name: "Supply chain resilience", category: "recover", maturity: "trending", description: "Supply chain resilience - Vendor continuity", technologies: ["SAP Ariba", "Coupa", "Tradeshift", "Resilinc"] },
+            { name: "Unified customer privacy rights", category: "govern", maturity: "emerging", description: "Unified customer privacy rights - Privacy rights harmonization", technologies: ["OneTrust", "TrustArc", "BigID", "Crunch"] },
+
+            // PROTECT (PR) - Trust Services (Identity, Access, Data Protection)
+            { name: "OPC UA", category: "protect", maturity: "mature", description: "OPC Unified Architecture - Secure IT/OT communication standard", technologies: ["Kepware", "Ignition", "Wonderware", "FactoryTalk"] },
+            { name: "PLC code security", category: "protect", maturity: "mature", description: "PLC code security - OT automation code protection", technologies: ["Fortinet FortiICS", "Claroty", "Tenable OT", "CyberArk"] },
+            { name: "Confidential computing", category: "protect", maturity: "trending", description: "Confidential computing - Data encryption in use", technologies: ["Intel SGX", "AMD SEV", "Azure Confidential", "AWS Nitro"] },
+            { name: "AI red teaming", category: "protect", maturity: "emerging", description: "AI red teaming - Adversarial testing for AI models", technologies: ["OpenAI", "Anthropic", "DeepMind", "Microsoft Research"] },
+            { name: "Deep fake protection", category: "protect", maturity: "emerging", description: "Deepfake protection - Deepfake detection and prevention", technologies: ["Microsoft Video Auth", "Adobe Content Creds", "Reality Defender", "Sensetime"] },
+            { name: "Containers (Docker/Kubernetes security)", category: "protect", maturity: "mature", description: "Container security - Secure containerization technology", technologies: ["Docker", "Kubernetes", "Podman", "OpenShift"] },
+            { name: "Tech debt mgt.", category: "protect", maturity: "trending", description: "Technical debt management - Technical debt reduction", technologies: ["SonarQube", "Veracode", "Checkmarx", "Fortify"] },
+            { name: "Extended tier 0", category: "protect", maturity: "trending", description: "Extended tier 0 - Extended privileged governance to OT/Cloud", technologies: ["CyberArk", "Delinea", "BeyondTrust", "HashiCorp"] },
+            { name: "API security", category: "protect", maturity: "mature", description: "API security - Application interface protection", technologies: ["Apigee", "Kong", "Mulesoft", "AWS API Gateway"] },
+            { name: "Zero trust enabled app.", category: "protect", maturity: "trending", description: "Zero trust enabled applications - Zero trust model implementation", technologies: ["Okta", "Google Zero Trust", "Microsoft Entra", "CyberArk"] },
+            { name: "Zero trust metrics", category: "protect", maturity: "mature", description: "Zero trust metrics - Zero trust implementation KPIs", technologies: ["Splunk", "Datadog", "New Relic", "Dynatrace"] },
+            { name: "Crypto agility", category: "protect", maturity: "trending", description: "Cryptographic agility - Cryptographic algorithm flexibility", technologies: ["HashiCorp Vault", "AWS KMS", "Azure Key Vault", "Thales Luna"] },
+            { name: "Homomorphic encryption", category: "protect", maturity: "emerging", description: "Homomorphic encryption - Computation on encrypted data", technologies: ["Microsoft SEAL", "Zama", "Duality", "IBM HElib"] },
+            { name: "Post Quantum Crypto", category: "protect", maturity: "emerging", description: "Post-quantum cryptography - Quantum-resistant cryptography", technologies: ["NIST PQC", "LibOQS", "Google Quantum", "Microsoft PQ"] },
+            { name: "Device bound tokens & Passkeys", category: "protect", maturity: "trending", description: "Device-bound tokens - Strong device-tied authentication", technologies: ["Windows Hello", "Passkeys", "Duo", "Auth0"] },
+            { name: "Passwordless authentication", category: "protect", maturity: "trending", description: "Passwordless authentication - FIDO2 and alternatives", technologies: ["FIDO2", "Windows Hello", "Yubico", "Okta"] },
+            { name: "CIAM B2B2C (Customer Identity & Access Management)", category: "protect", maturity: "mature", description: "Customer identity and access management - Unified customer identity", technologies: ["Okta", "Auth0", "Ping Identity", "CyberArk"] },
+            { name: "Zero Standing Privilege (ZSP)", category: "protect", maturity: "trending", description: "Zero standing privilege - Just-in-time privileged access", technologies: ["CyberArk PAM", "BeyondTrust", "Delinea", "HashiCorp"] },
+            { name: "Attribute Access Control (ABAC)", category: "protect", maturity: "mature", description: "Attribute-based access control - Context-based granular access", technologies: ["Axiomatics", "Ping Identity", "Okta", "AWS IAM"] },
+            { name: "SAP IDM end of life", category: "protect", maturity: "mature", description: "SAP IDM migration - End of life and migration", technologies: ["Okta", "Ping Identity", "Azure AD", "One Identity"] },
+            { name: "IAM orchestration", category: "protect", maturity: "mature", description: "IAM orchestration - Identity/access workflow automation", technologies: ["Okta Workflows", "SailPoint", "One Identity", "Ping"] },
+            { name: "Unstructured data access", category: "protect", maturity: "mature", description: "Unstructured data access - File/data access control", technologies: ["BigID", "Varonis", "IBM Security", "Imperva"] },
+            { name: "Decentralized identities (Self-sovereign identity)", category: "protect", maturity: "emerging", description: "Decentralized identities - SSI and blockchain solutions", technologies: ["Sovrin", "NIST DID", "Indy", "VerifiableCredentials"] },
+            { name: "CI/CD for IAM (CICD4IAM)", category: "protect", maturity: "trending", description: "CI/CD for IAM - IAM automation in DevOps", technologies: ["GitLab", "GitHub", "Azure DevOps", "Terraform"] },
+            { name: "Non-Human Identities", category: "protect", maturity: "trending", description: "Non-human identities - Machine/service access management", technologies: ["CyberArk PAM", "HashiCorp Consul", "Kubernetes RBAC", "AWS IAM"] },
+            { name: "AI for IAM", category: "protect", maturity: "emerging", description: "AI for IAM - ML-based identity anomaly detection", technologies: ["Okta AI", "Ping AI", "Azure AD AI", "Darktrace IAM"] },
+            { name: "Phishing resistant authentication", category: "protect", maturity: "trending", description: "Phishing-resistant authentication - FIDO2 and advanced MFA", technologies: ["FIDO2", "Windows Hello", "Duo", "Yubico"] },
+            { name: "Predictive anti-fraud", category: "protect", maturity: "mature", description: "Predictive anti-fraud - AI-based fraud detection", technologies: ["RSA Archer", "Feedzai", "Kount", "Riskified"] },
+            { name: "Account takeover protection", category: "protect", maturity: "mature", description: "Account takeover protection - Compromised account defense", technologies: ["Okta Insights", "Ping Identity", "CyberArk", "Auth0"] },
+            { name: "Identity Analytics", category: "protect", maturity: "mature", description: "Identity analytics - Access behavior analysis", technologies: ["Splunk", "Azure AD Analytics", "Okta Analytics", "Ping"] },
+            { name: "Adaptive authentication", category: "protect", maturity: "mature", description: "Adaptive authentication - Context and risk-based auth", technologies: ["Okta", "Auth0", "Microsoft Entra", "Ping Identity"] },
+            { name: "Modern authentication", category: "protect", maturity: "mature", description: "Modern authentication - Modern authentication approaches", technologies: ["OAuth2", "OIDC", "SAML 2.0", "JWT"] },
+            { name: "Continuous Access Evaluation (CAE)", category: "protect", maturity: "trending", description: "Continuous access evaluation - Real-time access re-evaluation", technologies: ["Microsoft Entra CAE", "Okta", "Azure AD", "Ping"] },
+            { name: "Continuous Identity", category: "protect", maturity: "emerging", description: "Continuous identity verification - Ongoing identity validation and behavioral analysis based on NIST Zero Trust principles", technologies: ["Microsoft Entra", "Okta Identity Threat Protection", "Ping Intelligence", "CyberArk Identity"] },
+            { name: "IIT Provisioning", category: "protect", maturity: "trending", description: "Just-in-time provisioning - Automated temporary access", technologies: ["Okta", "SailPoint", "Ping Identity", "One Identity"] },
+            { name: "Third Party Access Management (Third PartyNAM)", category: "protect", maturity: "trending", description: "Third-party access management - Secure external partner access", technologies: ["Okta B2B", "Auth0", "Ping CIAM", "CyberArk"] },
+            { name: "MFA (Multi-Factor Authentication)", category: "protect", maturity: "mature", description: "Multi-factor authentication - Standard MFA", technologies: ["Duo Security", "Okta MFA", "Microsoft MFA", "Google Authenticator"] },
+            { name: "PKI (Public Key Infrastructure)", category: "protect", maturity: "mature", description: "Public key infrastructure - Digital certificate management", technologies: ["Thales HSM", "Venafi", "Sectigo", "GlobalSign"] },
+            { name: "KMS (Key Management System)", category: "protect", maturity: "mature", description: "Key management system - Centralized key management", technologies: ["AWS KMS", "Azure Key Vault", "Thales Luna", "Google Cloud KMS"] },
+            { name: "OAuth2 & Identity Federation", category: "protect", maturity: "mature", description: "OAuth 2.0 and identity federation - Authorization and federation standards", technologies: ["Auth0", "Okta", "Ping Identity", "Microsoft Entra"] },
+            { name: "Certificate Lifecycle Management", category: "protect", maturity: "mature", description: "Certificate lifecycle management - Automated renewal", technologies: ["Venafi", "Sectigo", "DigiCert", "GlobalSign"] },
+            { name: "IAG & SoD (Identity Access Governance & Segregation of Duties)", category: "protect", maturity: "mature", description: "Access governance and duty separation - Privilege control", technologies: ["SailPoint", "Okta", "One Identity", "Ping"] },
+            { name: "IAMaaS (IAM as a Service)", category: "protect", maturity: "mature", description: "IAM as a service - Cloud-native IAM solution", technologies: ["Okta", "Auth0", "Azure AD", "Ping Identity"] },
+            { name: "IAM of Things", category: "protect", maturity: "trending", description: "IAM for IoT - Connected device identity management", technologies: ["Azure IoT", "AWS IoT Core", "Google Cloud IoT", "Cisco IoT"] },
+            { name: "Converged identity platform", category: "protect", maturity: "mature", description: "Converged identity platform - Unified identity solution", technologies: ["Okta", "Ping Identity", "SailPoint", "One Identity"] },
+            { name: "ID Threat DR (Identity Threat Disaster Recovery)", category: "protect", maturity: "trending", description: "Identity disaster recovery - Identity system recovery", technologies: ["Azure AD B2B", "Okta", "Ping Identity", "One Identity"] },
+            { name: "CIO ID Officer", category: "protect", maturity: "emerging", description: "Chief Identity Officer - Executive-level identity responsibility", technologies: ["Okta", "SailPoint", "Ping Identity", "Microsoft"] },
+            { name: "Extended enterprise IAM", category: "protect", maturity: "mature", description: "Extended enterprise IAM - Partner/external identity management", technologies: ["Okta", "Auth0", "Azure AD B2B", "Ping Identity"] },
+            { name: "AD redesign (AD Exit & Entra ID redesign)", category: "protect", maturity: "trending", description: "Active Directory migration - Transition to Entra ID", technologies: ["Microsoft Entra", "Azure AD", "Okta", "Delinea"] },
+            { name: "eiDAS", category: "protect", maturity: "mature", description: "Electronic Identification Authentication - EU eIDAS regulation", technologies: ["Sector", "Thales", "Gemalto", "Safenet"] },
+            { name: "PAM (Privileged Access Management)", category: "protect", maturity: "mature", description: "Privileged access management - Privileged account control", technologies: ["CyberArk", "BeyondTrust", "Delinea", "HashiCorp"] },
+            { name: "TOM IAM (Target Operating Model)", category: "protect", maturity: "mature", description: "IAM target operating model - IAM architecture and governance", technologies: ["SailPoint", "Okta", "Ping Identity", "One Identity"] },
+            { name: "Customer IAM", category: "protect", maturity: "mature", description: "Customer identity and access management - Customer identity", technologies: ["Okta CIAM", "Auth0", "Ping Identity", "Microsoft B2C"] },
+            { name: "Mainframe Identity", category: "protect", maturity: "mature", description: "Mainframe identity - Mainframe access management", technologies: ["CA Identity", "Delinea", "Okta", "One Identity"] },
+            { name: "Centralized password grain auth.", category: "protect", maturity: "trending", description: "Centralized password grain authentication - Granular authentication", technologies: ["Okta", "Ping Identity", "Azure AD", "Auth0"] },
+            { name: "DDoS prot. (DDoS Protection)", category: "protect", maturity: "mature", description: "DDoS protection - Denial of service mitigation", technologies: ["Cloudflare", "Akamai", "AWS Shield", "Radware"] },
+            { name: "DRM/DLP (Digital Rights & Data Loss Prevention)", category: "protect", maturity: "mature", description: "Digital rights and data loss prevention - Data protection", technologies: ["Microsoft RMS", "Varonis", "Imperva", "Forcepoint"] },
+            { name: "Micro segmentation", category: "protect", maturity: "mature", description: "Micro-segmentation - Granular network segmentation", technologies: ["VMware NSX", "Cisco ACI", "Fortinet", "Palo Alto"] },
+            { name: "Secure administration", category: "protect", maturity: "mature", description: "Secure administration - Secure administrative access", technologies: ["CyberArk PAM", "BeyondTrust", "Delinea", "HashiCorp"] },
+            { name: "Serverless apps security", category: "protect", maturity: "emerging", description: "Serverless applications security - Serverless function security", technologies: ["AWS Lambda Security", "Azure Functions", "Google Cloud Functions"] },
+            { name: "AI copilot security", category: "protect", maturity: "emerging", description: "AI copilot security - AI assistant security", technologies: ["Microsoft Copilot", "GitHub Copilot", "Tabnine", "Amazon CodeWhisperer"] },
+            { name: "Automatic data classification", category: "protect", maturity: "trending", description: "Automatic data classification - Classification automation", technologies: ["Microsoft Purview", "AWS Macie", "BigID", "Varonis"] },
+            { name: "SCADA Virtualization", category: "protect", maturity: "emerging", description: "SCADA virtualization - SCADA/OT system virtualization", technologies: ["Fortinet", "VMware", "Hyper-V", "KVM"] },
+            { name: "Cloud first IAM", category: "protect", maturity: "trending", description: "Cloud-first IAM - Cloud-first IAM approach", technologies: ["Okta", "Azure AD", "Ping Identity", "Auth0"] },
+            { name: "Cross channels front-end", category: "protect", maturity: "trending", description: "Multi-channel front-end - Unified multi-channel access", technologies: ["Okta", "Ping Identity", "Auth0", "CyberArk"] },
         ];
 
         let currentCategory = 'all';
@@ -690,11 +699,12 @@
 
         function getCategoryLabel(category) {
             const labels = {
-                'detect-respond': 'Detect & Respond',
-                'risk-governance': 'Risk & Governance',
-                'compliance-privacy': 'Compliance & Privacy',
-                'operational-resilience': 'Operational Resilience',
-                'trust-services': 'Trust Services'
+                'govern': 'Govern',
+                'identify': 'Identify',
+                'protect': 'Protect',
+                'detect': 'Detect',
+                'respond': 'Respond',
+                'recover': 'Recover'
             };
             return labels[category] || category;
         }

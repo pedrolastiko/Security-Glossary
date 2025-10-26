@@ -1,13 +1,14 @@
 # Security Glossary
 
-> An interactive, comprehensive glossary of **130+ cybersecurity terms** 
-> and **200+ enterprise technologies** for security professionals, CISOs, and CSOs.
+> An interactive, comprehensive glossary of **130+ cybersecurity terms**
+> and **200+ enterprise technologies** organized by **NIST CSF 2.0** framework
+> for security professionals, CISOs, and CSOs.
 
 ## 📖 What is This?
 
-**Security Glossary** is a living reference guide that helps security leaders
-understand modern cybersecurity terminology, trends, and the technologies that address
-each security need.
+**Security Glossary** is a living reference guide aligned with the **NIST Cybersecurity Framework (CSF) 2.0**
+that helps security leaders understand modern cybersecurity terminology, trends, and the technologies
+that address each security need across the six core functions: Govern, Identify, Protect, Detect, Respond, and Recover.
 
 Unlike traditional documentation or vendor marketing materials, this glossary is:
 
@@ -28,56 +29,64 @@ Unlike traditional documentation or vendor marketing materials, this glossary is
 
 ## 🗂️ How It's Organized
 
-The glossary is structured around **5 core security functions**:
+The glossary is structured around the **NIST Cybersecurity Framework (CSF) 2.0** with **6 core functions**:
 
-### 🎯 Detect & Respond
-**Challenge**: Finding and stopping threats in real-time
+### 🏛️ Govern (GV)
+**Purpose**: Establish and monitor organizational cybersecurity risk management strategy, expectations, and policy
 
-**Key Terms**: EDR, XDR, SOAR, SIEM, Threat Intelligence, Purple Team, DAST, 
-API Security, Cloud-based SIEM, Containers Security, Breach & Attack Simulation
+**Key Terms**: ISMS, DevSecOps, Risk Quantification, Regulatory Management, AI Act, DORA,
+Privacy Management, Compliance Assurance, Talent Management, Cyber Sustainability, Culture Change
 
-**Example Technologies**: CrowdStrike, Microsoft Defender, Splunk, Elastic, Darktrace
-
----
-
-### 📊 Risk & Governance
-**Challenge**: Managing security strategically across the organization
-
-**Key Terms**: DevSecOps, Risk Quantification, Talent Management, Real-time Risk, 
-Cyber Sustainability, Smart Sourcing, M&A Security, 4th Party Strategy, 
-Global Maturity Framework
-
-**Example Technologies**: ServiceNow, SailPoint, Okta, HashiCorp, MetricStream
+**Example Technologies**: Archer GRC, OneTrust, Workiva, ServiceNow, MetricStream
 
 ---
 
-### 📋 Compliance & Privacy
-**Challenge**: Meeting regulatory requirements and protecting data
+### 🔍 Identify (ID)
+**Purpose**: Develop organizational understanding to manage cybersecurity risk to systems, people, assets, data, and capabilities
 
-**Key Terms**: GDPR Compliance, AI Act, DORA, CRA, NIS2, Privacy Management, 
-BIA, Synthetic Data Anonymization, OpRes Regulations
+**Key Terms**: CTEM/BAS/EASM, DAST, SAST, SBOM/SCA, Red Team, Purple Team, Bug Bounty,
+AI Risk Assessment, Threat-led Pentest, Breach & Attack Simulation, Digital Twin
 
-**Example Technologies**: OneTrust, Workiva, AuditBoard, Archer GRC, BigID
+**Example Technologies**: Qualys, Tenable, Rapid7, Checkmarx, Veracode, HackerOne
 
 ---
 
-### 🔄 Operational Resilience
-**Challenge**: Ensuring business continuity and fast recovery
+### 🛡️ Protect (PR)
+**Purpose**: Use safeguards to manage cybersecurity risk
 
-**Key Terms**: DRP, Disaster Recovery, Immutable Backups, Crisis Management, 
-Fast IS Rebuilding, Resilience Culture, Supply Chain Resilience, Stress Testing
+**Key Terms**: Zero Trust, PAM, IAM, MFA, PKI, API Security, Containers Security, CNAPP,
+S-SDLC, Supply Chain Security, Confidential Computing, Post-Quantum Crypto, Passwordless
+
+**Example Technologies**: CyberArk, Okta, Microsoft Entra, Auth0, Snyk, Aqua Security
+
+---
+
+### 👁️ Detect (DE)
+**Purpose**: Find and analyze possible cybersecurity attacks and compromises
+
+**Key Terms**: EDR, XDR, SIEM, Threat Intelligence, Detection Engineering, Deception,
+AI for Security, Auto Secret Detection, AD Monitoring, Business App Surveillance, OT Probe
+
+**Example Technologies**: CrowdStrike, Splunk, Elastic, Microsoft Defender, Darktrace
+
+---
+
+### 🚨 Respond (RS)
+**Purpose**: Take action regarding a detected cybersecurity incident
+
+**Key Terms**: SOAR, Automated IR Playbook, Incident Response, Crisis Management
+
+**Example Technologies**: Splunk SOAR, Palo Alto XSOAR, Siemplify, ServiceNow SecOps
+
+---
+
+### 🔄 Recover (RC)
+**Purpose**: Restore assets and operations affected by a cybersecurity incident
+
+**Key Terms**: DRP, Disaster Recovery, Immutable Backups, Cyber Vault, Crisis Management,
+Fast IS Rebuilding, Resilience Culture, Supply Chain Resilience, OT Resilience
 
 **Example Technologies**: Veeam, Zerto, Commvault, IBM Spectrum, AWS DRS
-
----
-
-### 🔐 Trust Services
-**Challenge**: Securing identity, access, and data in transit/at rest
-
-**Key Terms**: PAM, IAM, MFA, Zero Trust, Passwordless, PKI, KMS, API Security, 
-Confidential Computing, Homomorphic Encryption, Post-Quantum Crypto
-
-**Example Technologies**: CyberArk, Okta, Microsoft Entra, Auth0, Ping Identity
 
 ---
 
