@@ -1,12 +1,12 @@
-# CISO Security Glossary
+# Security Glossary
 
 > An interactive, comprehensive glossary of **130+ cybersecurity terms** 
 > and **200+ enterprise technologies** for security professionals, CISOs, and CSOs.
 
 ## 📖 What is This?
 
-**CISO Security Glossary 2025** is a living reference guide that helps security leaders 
-understand modern cybersecurity terminology, trends, and the technologies that address 
+**Security Glossary** is a living reference guide that helps security leaders
+understand modern cybersecurity terminology, trends, and the technologies that address
 each security need.
 
 Unlike traditional documentation or vendor marketing materials, this glossary is:
@@ -129,7 +129,7 @@ Each term is positioned in one of three maturity stages:
 ## 🚀 Quick Start
 
 ### Option 1: Online
-1. [Open in browser](./ciso_radar_explorer.html)
+1. [Open in browser](./index.html)
 2. Start searching and exploring
 
 ### Option 2: Local Download
@@ -141,15 +141,15 @@ git clone https://github.com/yourusername/ciso-security-glossary.git
 cd ciso-security-glossary
 
 # Open in browser (any of these work)
-open ciso_radar_explorer.html           # macOS
-start ciso_radar_explorer.html          # Windows
-xdg-open ciso_radar_explorer.html       # Linux
+open index.html           # macOS
+start index.html          # Windows
+xdg-open index.html       # Linux
 ```
 
 ### Option 3: Bookmarklet
 Save this as a bookmark for quick access:
 ```javascript
-javascript:window.open('path/to/ciso_radar_explorer.html', '_blank');
+javascript:window.open('path/to/index.html', '_blank');
 ```
 
 ## 📊 Content Statistics
