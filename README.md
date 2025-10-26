@@ -1,11 +1,11 @@
-# CISO Security Glossary
+# Security Glossary
 
 > An interactive, comprehensive glossary of **130+ cybersecurity terms** 
 > and **200+ enterprise technologies** for security professionals, CISOs, and CSOs.
 
 ## 📖 What is This?
 
-**CISO Security Glossary 2025** is a living reference guide that helps security leaders 
+**Security Glossary 2025** is a living reference guide that helps security leaders 
 understand modern cybersecurity terminology, trends, and the technologies that address 
 each security need.
 
