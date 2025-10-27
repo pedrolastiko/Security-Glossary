@@ -1,6 +1,6 @@
 # Security Glossary
 
-> An interactive, comprehensive glossary of **130+ cybersecurity terms**
+> An interactive, comprehensive glossary of **154 cybersecurity terms**
 > and **200+ enterprise technologies** organized by **NIST CSF 2.0** framework
 > for security professionals, CISOs, and CSOs.
 
