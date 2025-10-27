@@ -243,6 +243,16 @@
             color: #333;
         }
 
+        .tech-badge a, .tech-badge-detail a {
+            transition: color 0.2s, text-decoration 0.2s;
+        }
+
+        .tech-badge a:hover, .tech-badge-detail a:hover {
+            color: #667eea !important;
+            text-decoration: underline !important;
+            cursor: pointer;
+        }
+
         .detail-panel {
             position: fixed;
             right: -500px;
@@ -426,7 +436,477 @@
     </div>
 
     <script>
-                const terms = [
+        // Technology URL mapping for clickable links
+        const technologyUrls = {
+            // Identity & Access Management
+            "Okta": "https://www.okta.com",
+            "Okta MFA": "https://www.okta.com/products/adaptive-mfa/",
+            "Okta Insights": "https://www.okta.com",
+            "Okta Workflows": "https://www.okta.com/platform/workflows/",
+            "Okta AI": "https://www.okta.com",
+            "Okta CIAM": "https://www.okta.com/customer-identity/",
+            "Okta B2B": "https://www.okta.com",
+            "Okta Analytics": "https://www.okta.com",
+            "Auth0": "https://auth0.com",
+            "Ping Identity": "https://www.pingidentity.com",
+            "Ping": "https://www.pingidentity.com",
+            "Ping AI": "https://www.pingidentity.com",
+            "Ping Intelligence": "https://www.pingidentity.com",
+            "Ping CIAM": "https://www.pingidentity.com",
+            "CyberArk": "https://www.cyberark.com",
+            "CyberArk PAM": "https://www.cyberark.com/products/privileged-access-manager/",
+            "CyberArk Identity": "https://www.cyberark.com",
+            "Microsoft Entra": "https://www.microsoft.com/en-us/security/business/identity-access/microsoft-entra-id",
+            "Microsoft Entra CAE": "https://www.microsoft.com/en-us/security/business/identity-access/",
+            "Azure AD": "https://azure.microsoft.com/en-us/products/active-directory/",
+            "Azure AD B2B": "https://azure.microsoft.com/en-us/products/active-directory/external-identities/",
+            "Azure AD AI": "https://azure.microsoft.com",
+            "Azure AD Analytics": "https://azure.microsoft.com",
+            "SailPoint": "https://www.sailpoint.com",
+            "One Identity": "https://www.oneidentity.com",
+            "Delinea": "https://delinea.com",
+            "BeyondTrust": "https://www.beyondtrust.com",
+
+            // Security Platforms & SIEM
+            "Splunk": "https://www.splunk.com",
+            "Splunk Enterprise": "https://www.splunk.com/en_us/products/splunk-enterprise.html",
+            "Splunk ES": "https://www.splunk.com/en_us/products/enterprise-security.html",
+            "Splunk SOAR": "https://www.splunk.com/en_us/products/splunk-security-orchestration-and-automation.html",
+            "Splunk APM": "https://www.splunk.com",
+            "Splunk Fusion": "https://www.splunk.com",
+            "Splunk Cloud": "https://www.splunk.com/en_us/products/splunk-cloud-platform.html",
+            "Elastic": "https://www.elastic.co",
+            "Elastic Security": "https://www.elastic.co/security",
+            "Elastic Cloud": "https://www.elastic.co/cloud",
+            "Elastic Stack": "https://www.elastic.co/elastic-stack",
+            "Elastic Fusion": "https://www.elastic.co",
+            "Elasticsearch": "https://www.elastic.co/elasticsearch",
+            "Datadog": "https://www.datadoghq.com",
+            "DataDog APM": "https://www.datadoghq.com/product/apm/",
+            "Chronicle": "https://chronicle.security",
+
+            // EDR/XDR
+            "CrowdStrike": "https://www.crowdstrike.com",
+            "CrowdStrike Falcon": "https://www.crowdstrike.com/products/endpoint-security/falcon-platform/",
+            "CrowdStrike XDR": "https://www.crowdstrike.com/products/xdr/",
+            "CrowdStrike AI": "https://www.crowdstrike.com",
+            "CrowdStrike Intelligence": "https://www.crowdstrike.com/products/threat-intelligence/",
+            "Microsoft Defender": "https://www.microsoft.com/en-us/security/business/threat-protection/microsoft-defender",
+            "Microsoft Defender XDR": "https://www.microsoft.com/en-us/security/business/siem-and-xdr/microsoft-defender-xdr",
+            "SentinelOne": "https://www.sentinelone.com",
+            "Carbon Black": "https://www.vmware.com/products/carbon-black.html",
+            "Cybereason": "https://www.cybereason.com",
+            "Palo Alto Cortex XDR": "https://www.paloaltonetworks.com/cortex/cortex-xdr",
+            "Sophos XDR": "https://www.sophos.com",
+
+            // GRC & Compliance
+            "OneTrust": "https://www.onetrust.com",
+            "Workiva": "https://www.workiva.com",
+            "Archer": "https://www.archerirm.com",
+            "Archer GRC": "https://www.archerirm.com",
+            "AuditBoard": "https://www.auditboard.com",
+            "MetricStream": "https://www.metricstream.com",
+            "RSA": "https://www.rsa.com",
+            "RSA Governance": "https://www.rsa.com",
+            "RSA Archer": "https://www.archerirm.com",
+            "ZenGRC": "https://www.zengrc.com",
+
+            // Vulnerability Management
+            "Rapid7": "https://www.rapid7.com",
+            "Rapid7 Insight": "https://www.rapid7.com",
+            "Tenable": "https://www.tenable.com",
+            "Tenable Nessus": "https://www.tenable.com/products/nessus",
+            "Tenable OT": "https://www.tenable.com/products/tenable-ot",
+            "Tenable Exposure": "https://www.tenable.com",
+            "Qualys": "https://www.qualys.com",
+            "Qualys VMDR": "https://www.qualys.com/apps/vulnerability-management-detection-response/",
+            "Qualys CTEM": "https://www.qualys.com",
+            "Nessus": "https://www.tenable.com/products/nessus",
+            "OpenVAS": "https://www.openvas.org",
+
+            // Application Security
+            "Snyk": "https://snyk.io",
+            "Checkmarx": "https://checkmarx.com",
+            "Veracode": "https://www.veracode.com",
+            "Fortify": "https://www.microfocus.com/en-us/cyberres/application-security/fortify-static-code-analyzer",
+            "SonarQube": "https://www.sonarsource.com/products/sonarqube/",
+            "Synopsys": "https://www.synopsys.com",
+            "Black Duck": "https://www.blackduck.com",
+            "BlackDuck": "https://www.blackduck.com",
+            "Sonatype": "https://www.sonatype.com",
+            "Sonatype Nexus": "https://www.sonatype.com/products/sonatype-nexus-repository",
+            "WhiteSource": "https://www.whitesourcesoftware.com",
+            "Dependency-Check": "https://owasp.org/www-project-dependency-check/",
+            "OWASP ZAP": "https://www.zaproxy.org",
+            "Burp Suite": "https://portswigger.net/burp",
+            "Burp Suite Pro": "https://portswigger.net/burp/pro",
+            "Acunetix": "https://www.acunetix.com",
+
+            // Cloud Security
+            "AWS": "https://aws.amazon.com",
+            "AWS Security Lake": "https://aws.amazon.com/security-lake/",
+            "AWS KMS": "https://aws.amazon.com/kms/",
+            "AWS IAM": "https://aws.amazon.com/iam/",
+            "AWS Shield": "https://aws.amazon.com/shield/",
+            "AWS Secrets Manager": "https://aws.amazon.com/secrets-manager/",
+            "AWS API Gateway": "https://aws.amazon.com/api-gateway/",
+            "AWS IoT Core": "https://aws.amazon.com/iot-core/",
+            "AWS Macie": "https://aws.amazon.com/macie/",
+            "AWS Lambda Security": "https://aws.amazon.com/lambda/",
+            "AWS Backup": "https://aws.amazon.com/backup/",
+            "AWS DRS": "https://aws.amazon.com/disaster-recovery/",
+            "AWS DR": "https://aws.amazon.com/disaster-recovery/",
+            "AWS Systems Manager": "https://aws.amazon.com/systems-manager/",
+            "AWS Cost Explorer": "https://aws.amazon.com/aws-cost-management/aws-cost-explorer/",
+            "Azure": "https://azure.microsoft.com",
+            "Azure Backup": "https://azure.microsoft.com/en-us/products/backup/",
+            "Azure Confidential": "https://azure.microsoft.com/en-us/solutions/confidential-compute/",
+            "Azure DevOps": "https://azure.microsoft.com/en-us/products/devops/",
+            "Azure Functions": "https://azure.microsoft.com/en-us/products/functions/",
+            "Azure IoT": "https://azure.microsoft.com/en-us/solutions/iot/",
+            "Azure Key Vault": "https://azure.microsoft.com/en-us/products/key-vault/",
+            "Azure Site": "https://azure.microsoft.com/en-us/products/site-recovery/",
+            "Google Cloud": "https://cloud.google.com",
+            "Google Cloud KMS": "https://cloud.google.com/security-key-management",
+            "Google Cloud IoT": "https://cloud.google.com/solutions/iot",
+            "Google Cloud Functions": "https://cloud.google.com/functions",
+            "Google Zero Trust": "https://cloud.google.com/beyondcorp",
+            "Google Quantum": "https://quantumai.google",
+            "Google Authenticator": "https://googleauthenticator.net",
+
+            // Container & Cloud Native Security
+            "Aqua": "https://www.aquasec.com",
+            "Aqua Security": "https://www.aquasec.com",
+            "Palo Alto Prisma": "https://www.paloaltonetworks.com/prisma/cloud",
+            "Wiz": "https://www.wiz.io",
+            "Docker": "https://www.docker.com",
+            "Docker Security": "https://www.docker.com/products/docker-security/",
+            "Kubernetes": "https://kubernetes.io",
+            "Kubernetes Security": "https://kubernetes.io/docs/concepts/security/",
+            "Kubernetes RBAC": "https://kubernetes.io",
+            "Twistlock": "https://www.paloaltonetworks.com/prisma/cloud",
+            "Podman": "https://podman.io",
+            "OpenShift": "https://www.redhat.com/en/technologies/cloud-computing/openshift",
+
+            // Network & Infrastructure Security
+            "Fortinet": "https://www.fortinet.com",
+            "Fortinet Security Fabric": "https://www.fortinet.com/solutions/enterprise-midsize-business/security-fabric",
+            "Fortinet FortiGate": "https://www.fortinet.com/products/next-generation-firewall",
+            "Fortinet FortiSOC": "https://www.fortinet.com",
+            "Fortinet FortiSIEM": "https://www.fortinet.com/products/siem/fortisiem",
+            "Fortinet FortiManager": "https://www.fortinet.com/products/management/fortimanager",
+            "Fortinet FortiOT": "https://www.fortinet.com",
+            "Fortinet FortiICS": "https://www.fortinet.com",
+            "Fortinet AI": "https://www.fortinet.com",
+            "Palo Alto": "https://www.paloaltonetworks.com",
+            "Cisco": "https://www.cisco.com",
+            "Cisco SecureX": "https://www.cisco.com/c/en/us/products/security/securex/index.html",
+            "Cisco ACI": "https://www.cisco.com/c/en/us/solutions/data-center-virtualization/application-centric-infrastructure/index.html",
+            "Cisco DNA": "https://www.cisco.com/c/en/us/products/cloud-systems-management/dna-center/index.html",
+            "Cisco ISE": "https://www.cisco.com/c/en/us/products/security/identity-services-engine/index.html",
+            "Cisco Intersight": "https://www.cisco.com/c/en/us/products/cloud-systems-management/intersight/index.html",
+            "Cisco IoT": "https://www.cisco.com/c/en/us/solutions/internet-of-things/overview.html",
+            "VMware": "https://www.vmware.com",
+            "VMware NSX": "https://www.vmware.com/products/nsx.html",
+            "VMware Site Recovery": "https://www.vmware.com/products/site-recovery-manager.html",
+            "VMware Site": "https://www.vmware.com/products/site-recovery-manager.html",
+            "VMware Cost": "https://www.vmware.com",
+            "Juniper": "https://www.juniper.net",
+            "Cloudflare": "https://www.cloudflare.com",
+            "Akamai": "https://www.akamai.com",
+            "Radware": "https://www.radware.com",
+
+            // Backup & Recovery
+            "Veeam": "https://www.veeam.com",
+            "Veeam Backup": "https://www.veeam.com/backup-replication-software.html",
+            "Veeam Immutable": "https://www.veeam.com",
+            "Commvault": "https://www.commvault.com",
+            "CommVault": "https://www.commvault.com",
+            "Zerto": "https://www.zerto.com",
+            "Veritas": "https://www.veritas.com",
+            "IBM Spectrum": "https://www.ibm.com/products/spectrum-protect",
+            "Dell EMC": "https://www.dell.com/en-us/dt/storage/index.htm",
+            "Dell EMC RecoverPoint": "https://www.dell.com/en-us/dt/storage/recoverpoint-for-virtual-machines/index.htm",
+
+            // DevSecOps & CI/CD
+            "GitLab": "https://about.gitlab.com",
+            "GitLab CI/CD": "https://docs.gitlab.com/ee/ci/",
+            "GitLab DevSecOps": "https://about.gitlab.com/solutions/dev-sec-ops/",
+            "GitHub": "https://github.com",
+            "GitHub Actions": "https://github.com/features/actions",
+            "GitHub Advanced Security": "https://docs.github.com/en/get-started/learning-about-github/about-github-advanced-security",
+            "GitHub Copilot": "https://github.com/features/copilot",
+            "GitGuardian": "https://www.gitguardian.com",
+            "HashiCorp": "https://www.hashicorp.com",
+            "HashiCorp Vault": "https://www.vaultproject.io",
+            "HashiCorp Consul": "https://www.consul.io",
+            "HashiCorp Terraform": "https://www.terraform.io",
+            "Terraform": "https://www.terraform.io",
+            "JFrog DevOps": "https://jfrog.com",
+
+            // Threat Intelligence & Detection
+            "Darktrace": "https://www.darktrace.com",
+            "Darktrace AI": "https://www.darktrace.com",
+            "Darktrace IAM": "https://www.darktrace.com",
+            "Vectra AI": "https://www.vectra.ai",
+            "Recorded Future": "https://www.recordedfuture.com",
+            "ThreatStream": "https://www.anomali.com/products/threatstream",
+            "MISP": "https://www.misp-project.org",
+            "MITRE ATT&CK": "https://attack.mitre.org",
+            "Securonix": "https://www.securonix.com",
+
+            // Bug Bounty & Pentesting
+            "HackerOne": "https://www.hackerone.com",
+            "Bugcrowd": "https://www.bugcrowd.com",
+            "Intigriti": "https://www.intigriti.com",
+            "Yeswehack": "https://www.yeswehack.com",
+            "Synack": "https://www.synack.com",
+            "Metasploit": "https://www.metasploit.com",
+            "Pentera": "https://pentera.io",
+            "SafeBreak": "https://www.safebreak.com",
+
+            // SOAR & Automation
+            "Demisto": "https://www.paloaltonetworks.com/cortex/xsoar",
+            "Siemplify": "https://chronicle.security/products/xdr/",
+            "Swimlane": "https://swimlane.com",
+
+            // ITSM & Service Management
+            "ServiceNow": "https://www.servicenow.com",
+            "ServiceNow ITSM": "https://www.servicenow.com/products/itsm.html",
+            "ServiceNow SecOps": "https://www.servicenow.com/products/security-operations.html",
+            "ServiceNow CMDB": "https://www.servicenow.com/products/servicenow-platform/configuration-management-database.html",
+            "BMC Remedy": "https://www.bmc.com/it-solutions/remedy-itsm.html",
+            "BMC CMDB": "https://www.bmc.com",
+            "Jira Service Management": "https://www.atlassian.com/software/jira/service-management",
+            "Atlassian": "https://www.atlassian.com",
+            "Atlassian Jira": "https://www.atlassian.com/software/jira",
+
+            // Monitoring & APM
+            "Dynatrace": "https://www.dynatrace.com",
+            "New Relic": "https://newrelic.com",
+            "AppDynamics": "https://www.appdynamics.com",
+
+            // Data Protection & Privacy
+            "BigID": "https://bigid.com",
+            "Varonis": "https://www.varonis.com",
+            "Imperva": "https://www.imperva.com",
+            "Forcepoint": "https://www.forcepoint.com",
+            "TrustArc": "https://trustarc.com",
+            "Microsoft RMS": "https://www.microsoft.com/en-us/security/business/information-protection/microsoft-purview-information-protection",
+            "Microsoft Purview": "https://www.microsoft.com/en-us/security/business/microsoft-purview",
+            "Mostly AI": "https://mostly.ai",
+            "Tonic.ai": "https://www.tonic.ai",
+            "Gretel": "https://gretel.ai",
+            "Crunch": "https://www.crunchanalytics.com",
+
+            // OT/ICS Security
+            "Claroty": "https://claroty.com",
+            "Nozomi": "https://www.nozominetworks.com",
+            "Nozomi Networks": "https://www.nozominetworks.com",
+
+            // API & Integration
+            "Apigee": "https://cloud.google.com/apigee",
+            "Kong": "https://konghq.com",
+            "Mulesoft": "https://www.mulesoft.com",
+
+            // Training & Awareness
+            "Immersive Labs": "https://www.immersivelabs.com",
+            "KnowBe4": "https://www.knowbe4.com",
+            "Proofpoint": "https://www.proofpoint.com",
+            "Infosec": "https://www.infosecinstitute.com",
+            "HackTheBox": "https://www.hackthebox.com",
+            "TryHackMe": "https://tryhackme.com",
+            "Cybrary": "https://www.cybrary.it",
+            "LinkedIn Learning": "https://www.linkedin.com/learning",
+            "Pluralsight": "https://www.pluralsight.com",
+            "CyberDefenders": "https://cyberdefenders.org",
+            "Coursera": "https://www.coursera.org",
+            "Udemy": "https://www.udemy.com",
+            "Skillsoft": "https://www.skillsoft.com",
+            "edX": "https://www.edx.org",
+
+            // Consulting & Professional Services
+            "Deloitte": "https://www2.deloitte.com",
+            "Deloitte AI Governance": "https://www2.deloitte.com",
+            "Deloitte AI Risk": "https://www2.deloitte.com",
+            "Deloitte Analytics": "https://www2.deloitte.com",
+            "Accenture": "https://www.accenture.com",
+            "Accenture AI": "https://www.accenture.com",
+            "Capgemini": "https://www.capgemini.com",
+            "Capgemini AI": "https://www.capgemini.com",
+            "KPMG": "https://home.kpmg",
+            "Mandiant": "https://www.mandiant.com",
+
+            // Risk & Threat Intel
+            "BitSight": "https://www.bitsight.com",
+            "SecurityScorecard": "https://securityscorecard.com",
+            "RiskLens": "https://www.risklens.com",
+            "Kenna Security": "https://www.kennasecurity.com",
+
+            // Vendor Management
+            "Whistic": "https://www.whistic.com",
+            "Vanta": "https://www.vanta.com",
+            "Prevalent": "https://www.prevalent.net",
+
+            // Procurement
+            "SAP Ariba": "https://www.ariba.com",
+            "Coupa": "https://www.coupa.com",
+            "Tradeshift": "https://tradeshift.com",
+            "TrustRadius": "https://www.trustradius.com",
+            "Resilinc": "https://www.resilinc.com",
+
+            // Cryptography & PKI
+            "Thales": "https://www.thalesgroup.com",
+            "Thales HSM": "https://cpl.thalesgroup.com/encryption/hardware-security-modules",
+            "Thales Luna": "https://cpl.thalesgroup.com/encryption/hardware-security-modules/network-hsms",
+            "Venafi": "https://www.venafi.com",
+            "Sectigo": "https://sectigo.com",
+            "DigiCert": "https://www.digicert.com",
+            "GlobalSign": "https://www.globalsign.com",
+            "Gemalto": "https://www.thalesgroup.com",
+            "Safenet": "https://cpl.thalesgroup.com",
+
+            // MFA & Authentication
+            "Duo Security": "https://duo.com",
+            "Duo": "https://duo.com",
+            "Yubico": "https://www.yubico.com",
+            "Windows Hello": "https://www.microsoft.com/en-us/windows/windows-hello",
+            "Passkeys": "https://www.passkeys.io",
+            "FIDO2": "https://fidoalliance.org/fido2/",
+
+            // Fraud Detection
+            "Feedzai": "https://feedzai.com",
+            "Kount": "https://kount.com",
+            "Riskified": "https://www.riskified.com",
+
+            // Chaos Engineering & Testing
+            "Gremlin": "https://www.gremlin.com",
+            "Chaos Toolkit": "https://chaostoolkit.org",
+            "Chaos Mesh": "https://chaos-mesh.org",
+            "Atomic Red Team": "https://atomicredteam.io",
+            "Caldera": "https://caldera.mitre.org",
+            "Locust": "https://locust.io",
+            "JMeter": "https://jmeter.apache.org",
+
+            // Secret Management
+            "TruffleHog": "https://trufflesecurity.com",
+
+            // Standards & Frameworks
+            "NIST": "https://www.nist.gov",
+            "NIST PQC": "https://csrc.nist.gov/projects/post-quantum-cryptography",
+            "NIST DID": "https://www.nist.gov",
+            "ISO 27001": "https://www.iso.org/isoiec-27001-information-security.html",
+            "COBIT": "https://www.isaca.org/resources/cobit",
+            "ITIL": "https://www.axelos.com/certifications/itil-service-management",
+            "SAFe": "https://scaledagileframework.com",
+            "OAuth2": "https://oauth.net/2/",
+            "OIDC": "https://openid.net/connect/",
+            "SAML 2.0": "https://wiki.oasis-open.org/security",
+            "JWT": "https://jwt.io",
+
+            // Agile & Project Management
+            "Jira Align": "https://www.atlassian.com/software/jira/align",
+            "Microsoft Project": "https://www.microsoft.com/en-us/microsoft-365/project/project-management-software",
+
+            // Business Intelligence
+            "Domo": "https://www.domo.com",
+            "Tableau": "https://www.tableau.com",
+
+            // Hardware/Chip Security
+            "Intel SGX": "https://www.intel.com/content/www/us/en/architecture-and-technology/software-guard-extensions.html",
+            "AMD SEV": "https://www.amd.com/en/technologies/secure-encrypted-virtualization",
+            "AWS Nitro": "https://aws.amazon.com/ec2/nitro/",
+
+            // AI/ML
+            "OpenAI": "https://openai.com",
+            "Anthropic": "https://www.anthropic.com",
+            "DeepMind": "https://www.deepmind.com",
+            "Microsoft Research": "https://www.microsoft.com/en-us/research/",
+            "Microsoft Copilot": "https://www.microsoft.com/en-us/microsoft-copilot",
+            "Microsoft Video Auth": "https://www.microsoft.com",
+            "TensorFlow Security": "https://www.tensorflow.org/guide/security",
+            "MLflow": "https://mlflow.org",
+            "Kubeflow": "https://www.kubeflow.org",
+            "Databricks": "https://www.databricks.com",
+            "Tabnine": "https://www.tabnine.com",
+            "Amazon CodeWhisperer": "https://aws.amazon.com/codewhisperer/",
+
+            // Content & Media
+            "Adobe Content Creds": "https://contentcredentials.org",
+            "Reality Defender": "https://realitydefender.com",
+            "Sensetime": "https://www.sensetime.com",
+
+            // OT/ICS Vendors
+            "Rockwell Automation": "https://www.rockwellautomation.com",
+            "Schneider": "https://www.se.com",
+            "Siemens": "https://www.siemens.com",
+            "Kepware": "https://www.kepware.com",
+            "Ignition": "https://inductiveautomation.com",
+            "Wonderware": "https://www.aveva.com/en/products/wonderware/",
+            "FactoryTalk": "https://www.rockwellautomation.com/en-us/products/software/factorytalk.html",
+
+            // Endpoint Protection
+            "Bitdefender": "https://www.bitdefender.com",
+            "Kaspersky": "https://www.kaspersky.com",
+            "Avast Business": "https://www.avast.com/business",
+            "Contrast Security": "https://www.contrastsecurity.com",
+            "Imperva RASP": "https://www.imperva.com/products/runtime-application-self-protection-rasp/",
+            "WhiteHat": "https://www.whitehatsec.com",
+
+            // SCADA & Industrial
+            "Hyper-V": "https://learn.microsoft.com/en-us/virtualization/hyper-v-on-windows/",
+            "KVM": "https://www.linux-kvm.org",
+
+            // EASM & Attack Surface
+            "Censys": "https://censys.io",
+            "Shodan": "https://www.shodan.io",
+
+            // Deception
+            "Deception Point": "https://www.deceptionpoint.com",
+            "Trapx Security": "https://trapx.com",
+            "Illusive Networks": "https://illusive.com",
+            "GuardiCore": "https://www.guardicore.com",
+
+            // Secret Management
+            "Delinea Secret Server": "https://delinea.com/products/secret-server",
+            "Microsoft Sentinel": "https://azure.microsoft.com/en-us/products/microsoft-sentinel/",
+            "Quest Privilege Manager": "https://www.quest.com/products/privilege-manager-for-windows/",
+
+            // SIEM
+            "IBM QRadar": "https://www.ibm.com/products/qradar-siem",
+            "IBM QRadar Cloud": "https://www.ibm.com/products/qradar-siem",
+            "IBM Privacy": "https://www.ibm.com",
+            "IBM HElib": "https://github.com/homenc/HElib",
+            "IBM Maximo": "https://www.ibm.com/products/maximo",
+            "IBM Security": "https://www.ibm.com/security",
+            "IBM Turbonomic": "https://www.ibm.com/products/turbonomic",
+
+            // Homomorphic Encryption
+            "Microsoft SEAL": "https://www.microsoft.com/en-us/research/project/microsoft-seal/",
+            "Zama": "https://www.zama.ai",
+            "Duality": "https://dualitytech.com",
+
+            // Post-Quantum Crypto
+            "LibOQS": "https://openquantumsafe.org",
+            "Microsoft PQ": "https://www.microsoft.com",
+
+            // Identity Standards
+            "Sovrin": "https://sovrin.org",
+            "Indy": "https://www.hyperledger.org/use/hyperledger-indy",
+            "VerifiableCredentials": "https://www.w3.org/TR/vc-data-model/",
+
+            // Legacy IAM
+            "CA Identity": "https://www.broadcom.com",
+            "Axiomatics": "https://www.axiomatics.com",
+
+            // eIDAS
+            "Sector": "https://www.sectigo.com",
+
+            // VMware
+            "SolarWinds": "https://www.solarwinds.com"
+        };
+
+        const terms = [
             { name: "0day management", category: "identify", maturity: "emerging", description: "Zero-day vulnerability management - Critical CVE response", technologies: ["Rapid7", "Tenable", "Qualys", "Kenna Security"] },
             { name: "4th party strategy", category: "govern", maturity: "trending", description: "4th party strategy - Indirect vendor management", technologies: ["Whistic", "Vanta", "OneTrust", "Prevalent"] },
             { name: "Account takeover protection", category: "protect", maturity: "mature", description: "Account takeover protection - Compromised account defense", technologies: ["Okta Insights", "Ping Identity", "CyberArk", "Auth0"] },
@@ -600,6 +1080,15 @@
             });
         }
 
+        // Helper function to create clickable technology links
+        function createTechLink(techName) {
+            const url = technologyUrls[techName];
+            if (url) {
+                return `<a href="${url}" target="_blank" rel="noopener noreferrer" style="text-decoration: none; color: inherit;">${techName}</a>`;
+            }
+            return techName;
+        }
+
         function displayTerms() {
             const container = document.getElementById('termsContainer');
             container.innerHTML = '';
@@ -639,7 +1128,7 @@
                     <div class="term-tech">
                         <div class="tech-label">Examples:</div>
                         <div class="tech-list">
-                            ${term.technologies.slice(0, 2).map(tech => `<span class="tech-badge">${tech}</span>`).join('')}
+                            ${term.technologies.slice(0, 2).map(tech => `<span class="tech-badge">${createTechLink(tech)}</span>`).join('')}
                         </div>
                     </div>
                 `;
@@ -719,7 +1208,7 @@
                 <div class="detail-section">
                     <h3>💻 Technologies & Solutions (${term.technologies.length})</h3>
                     <div class="tech-list-detail">
-                        ${term.technologies.map(tech => `<span class="tech-badge-detail">${tech}</span>`).join('')}
+                        ${term.technologies.map(tech => `<span class="tech-badge-detail">${createTechLink(tech)}</span>`).join('')}
                     </div>
                 </div>
 
