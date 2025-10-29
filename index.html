@@ -396,6 +396,33 @@
             padding: 40px;
             color: #999;
         }
+
+        footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            border-top: 3px solid rgba(255, 255, 255, 0.1);
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.95em;
+            opacity: 0.95;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: opacity 0.2s;
+        }
+
+        footer a:hover {
+            opacity: 0.8;
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -1269,5 +1296,9 @@
         // Initialize app
         init();
     </script>
+
+    <footer>
+        <p>Security Glossary © 2025 - Powered with ❤️ by <a href="https://claude.com/claude-code" target="_blank" rel="noopener noreferrer">Claude Code</a></p>
+    </footer>
 </body>
 </html>
