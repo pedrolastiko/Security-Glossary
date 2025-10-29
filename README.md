@@ -138,7 +138,7 @@ Each term is positioned in one of three maturity stages:
 ## 🚀 Quick Start
 
 ### Option 1: Online
-1. [Open in browser](./index.html)
+1. [Open in browser](https://pedrolastiko.github.io/Security-Glossary/)
 2. Start searching and exploring
 
 ### Option 2: Local Download
