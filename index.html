@@ -131,8 +131,8 @@
 
         .terms-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
         }
 
         .term-card {
@@ -146,6 +146,7 @@
             display: flex;
             flex-direction: column;
             min-height: 200px;
+            height: 100%;
         }
 
         .term-card:hover {
@@ -352,41 +353,90 @@
             opacity: 0.9;
         }
 
-        /* Responsive grid for different screen sizes */
-        @media (min-width: 1600px) {
-            .terms-grid {
-                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            }
-        }
+        /* Responsive design - Mobile first approach */
 
-        @media (min-width: 1200px) and (max-width: 1599px) {
+        /* Mobile: 1 column (< 640px) */
+        @media (max-width: 639px) {
             .terms-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+                grid-template-columns: 1fr;
+                gap: 15px;
             }
-        }
 
-        @media (min-width: 900px) and (max-width: 1199px) {
-            .terms-grid {
-                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
             }
-        }
 
-        @media (max-width: 768px) {
+            .stat-box {
+                padding: 15px;
+            }
+
+            .stat-number {
+                font-size: 1.5em;
+            }
+
+            header h1 {
+                font-size: 1.8em;
+            }
+
+            header p {
+                font-size: 0.9em;
+            }
+
             .content {
-                grid-template-columns: 1fr;
-            }
-
-            .terms-grid {
-                grid-template-columns: 1fr;
+                padding: 20px;
             }
 
             .detail-panel {
                 width: 100%;
                 right: -100%;
+                padding: 20px;
+            }
+
+            .filter-btn {
+                padding: 6px 10px;
+                font-size: 0.85em;
+            }
+        }
+
+        /* Tablet: 2 columns (640px - 1023px) */
+        @media (min-width: 640px) and (max-width: 1023px) {
+            .terms-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 18px;
+            }
+
+            .stats {
+                grid-template-columns: repeat(4, 1fr);
             }
 
             header h1 {
-                font-size: 1.8em;
+                font-size: 2em;
+            }
+
+            .detail-panel {
+                width: 70%;
+                right: -70%;
+            }
+        }
+
+        /* Desktop medium: 3 columns (1024px - 1439px) */
+        @media (min-width: 1024px) and (max-width: 1439px) {
+            .terms-grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 20px;
+            }
+        }
+
+        /* Desktop large: 4 columns (>= 1440px) - default */
+        @media (min-width: 1440px) {
+            .container {
+                max-width: 1600px;
+            }
+
+            .terms-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
             }
         }
 
