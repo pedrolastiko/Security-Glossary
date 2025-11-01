@@ -1,4 +1,4 @@
-# Security Glossary
+# Cybersecurity Glossary
 
 > An interactive, comprehensive glossary of **154 cybersecurity terms**
 > and **200+ enterprise technologies** organized by **NIST CSF 2.0** framework
@@ -6,7 +6,7 @@
 
 ## 📖 What is This?
 
-**Security Glossary** is a living reference guide aligned with the **NIST Cybersecurity Framework (CSF) 2.0**
+**Cybersecurity Glossary** is a living reference guide aligned with the **NIST Cybersecurity Framework (CSF) 2.0**
 that helps security leaders understand modern cybersecurity terminology, trends, and the technologies
 that address each security need across the six core functions: Govern, Identify, Protect, Detect, Respond, and Recover.
 
